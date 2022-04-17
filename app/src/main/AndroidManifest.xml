@@ -10,10 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyFoody">
         <activity
-            android:name=".ForgotPassword2"
+            android:name=".SignUp2"
             android:exported="false" />
         <activity
-            android:name=".ForgotPassword1"
+            android:name=".SignUp1"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

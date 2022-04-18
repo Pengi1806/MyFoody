@@ -21,7 +21,6 @@ public class HomeActivity extends AppCompatActivity {
     TextView txtViewThongTinCaNhan;
     TextView txtViewDoiMatKhau;
     TextView txtViewChuQuan;
-    TextView txtViewDangXuat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,13 +45,5 @@ public class HomeActivity extends AppCompatActivity {
                 return false;
             }
         });
-
-        txtViewDangXuat = (TextView) accountFragment.getView().findViewById(R.id.DangXuat);
-//        txtViewDangXuat.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                finish();
-//            }
-//        });
     }
 }

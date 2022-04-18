@@ -16,6 +16,12 @@
             android:name=".SignUp1"
             android:exported="false" />
         <activity
+            android:name=".ForgotPassword2"
+            android:exported="false" />
+        <activity
+            android:name=".ForgotPassword1"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

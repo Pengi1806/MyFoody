@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#D6D6D6"
+    tools:context=".AccountFragment">
+
+
+    <LinearLayout
+        android:id="@+id/actionBarAccount"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="#70ad47"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:gravity="center"
+            android:id="@+id/textViewAccount"
+            android:text="More"
+            android:textStyle="bold"
+            android:textSize="32sp"
+            android:textColor="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/containerImageAccount"
+        android:layout_marginTop="40dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        app:cardCornerRadius="100dp"
+        app:layout_constraintTop_toBottomOf="@+id/actionBarAccount"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <ImageView
+            android:id="@+id/imgAccount"
+            android:src="@drawable/capture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:id="@+id/textViewFullNameAccount"
+        android:text="Nhật Hào"
+        android:textStyle="bold"
+        android:textSize="32sp"
+        android:textColor="@color/black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/containerImageAccount"/>
+
+    <TextView
+        android:id="@+id/ThongTinCaNhan"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/black"
+        android:text="Thông tin cá nhân"
+        android:textSize="28sp"
+        android:drawableLeft="@drawable/ic_settings"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/textViewFullNameAccount"/>
+    <TextView
+        android:id="@+id/DoiMatKhau"
+        android:layout_marginTop="15dp"
+        android:textColor="@color/black"
+        android:text="Đổi mật khẩu"
+        android:textSize="28sp"
+        android:drawableLeft="@drawable/ic_lock"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/ThongTinCaNhan"/>
+
+    <TextView
+        android:id="@+id/ChuQuan"
+        android:layout_marginTop="15dp"
+        android:textColor="@color/black"
+        android:text="Chủ quán"
+        android:textSize="28sp"
+        android:drawableLeft="@drawable/ic_store"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/DoiMatKhau"/>
+
+    <TextView
+        android:gravity="center"
+        android:id="@+id/DangXuat"
+        android:layout_marginTop="15dp"
+        android:textColor="#ff0000"
+        android:text="Đăng xuất"
+        android:textSize="28sp"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/ChuQuan"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

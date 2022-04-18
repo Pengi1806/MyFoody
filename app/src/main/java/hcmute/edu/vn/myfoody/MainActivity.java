@@ -5,11 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
     TextView txtForgotPassword;
+    TextView txtSignUp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().hide();
 
         txtForgotPassword = (TextView) findViewById(R.id.forgotPassword);
+        txtSignUp = (TextView) findViewById(R.id.textSignUp);
 
         txtForgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -26,5 +29,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        txtSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, SignUp1.class);
+                startActivity(intent);
+            }
+        });
+
     }
 }

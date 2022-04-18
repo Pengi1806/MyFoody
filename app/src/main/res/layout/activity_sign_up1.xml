@@ -8,14 +8,23 @@
     android:layout_height="match_parent"
     tools:context=".SignUp1">
 
+    <ImageButton
+        android:id="@+id/imgBackSignUp1"
+        android:src="@drawable/ic_back"
+        android:background="@color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
     <TextView
         android:id="@+id/TextCreateAccount"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="Create Account"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgBackSignUp1"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:textSize="34sp"
@@ -25,12 +34,13 @@
         />
 
     <EditText
-        android:id="@+id/editUsername"
+        android:id="@+id/editFullname"
         android:textSize="24sp"
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Fullname"
+        android:drawableLeft="@drawable/ic_fullname"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TextCreateAccount"/>
@@ -42,9 +52,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Phone"
+        android:drawableLeft="@drawable/ic_baseline_phone"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editUsername"/>
+        app:layout_constraintTop_toBottomOf="@+id/editFullname"/>
 
     <EditText
         android:id="@+id/editEmail"
@@ -53,6 +64,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Email"
+        android:drawableLeft="@drawable/ic_email"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editPhone"/>
@@ -64,6 +76,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Password"
+        android:drawableLeft="@drawable/ic_lock"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editEmail"/>
@@ -75,6 +88,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Confirm Password"
+        android:drawableLeft="@drawable/ic_lock"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editPassword"/>
@@ -86,6 +100,7 @@
         android:layout_height="wrap_content"
         android:background="#70ad47"
         android:text="Next"
+        android:textColor="@color/white"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"

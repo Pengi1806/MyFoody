@@ -18,7 +18,6 @@ public class SignUp2 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().hide();
         setContentView(R.layout.activity_sign_up2);
 
         btnCreateAccount = (Button) findViewById(R.id.btnCreateAccount);

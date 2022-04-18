@@ -12,6 +12,9 @@ import android.widget.TextView;
 
 public class AccountFragment extends Fragment {
 
+    TextView txtThongTinCaNhan;
+    TextView txtDoiMatKhau;
+    TextView txtChuQuan;
     TextView txtDangXuat;
 
     @Override
@@ -20,7 +23,34 @@ public class AccountFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_account, container, false);
 
+        txtThongTinCaNhan = (TextView) view.findViewById(R.id.ThongTinCaNhan);
+        txtDoiMatKhau = (TextView) view.findViewById(R.id.DoiMatKhau);
+        txtChuQuan = (TextView) view.findViewById(R.id.ChuQuan);
         txtDangXuat = (TextView) view.findViewById(R.id.DangXuat);
+
+        txtThongTinCaNhan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), ThongTinCaNhanActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        txtDoiMatKhau.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), ChangePasswordActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        txtChuQuan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), ChuQuanActivity.class);
+                startActivity(intent);
+            }
+        });
 
         txtDangXuat.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -28,7 +58,6 @@ public class AccountFragment extends Fragment {
                 getActivity().finish();
             }
         });
-
         return view;
     }
 }

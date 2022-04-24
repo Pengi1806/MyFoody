@@ -3,13 +3,16 @@ package hcmute.edu.vn.myfoody;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
+    Database database;
     TextView txtForgotPassword;
     Button btnLogin;
     TextView txtSignUp;
@@ -46,5 +49,129 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        // Tạo database
+        database = new Database(MainActivity.this, "foody.sqlite", null, 1);
+
+        // Tạo bảng
+        database.QueryData("CREATE TABLE IF NOT EXISTS SecurityQuestions(" +
+                "QuestionId INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "QuestionContent NVARCHAR(200))");
+
+        database.QueryData("CREATE TABLE IF NOT EXISTS Users(" +
+                "Email VARCHAR(200) PRIMARY KEY, " +
+                "Password VARCHAR(200), " +
+                "Name NVARCHAR(200), " +
+                "Sex NVARCHAR(10), " +
+                "Address NVARCHAR(200), " +
+                "Phone VARCHAR(15), " +
+                "Avatar Blob, " +
+                "Role INTEGER, " +
+                "SecurityAnswer NVARCHAR(200), " +
+                "QuestionId INTEGER, " +
+                "FOREIGN KEY (QuestionId) REFERENCES SecurityQuestions (QuestionId))");
+
+        database.QueryData("CREATE TABLE IF NOT EXISTS Categories(" +
+                "CategoryId INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "CategoryName NVARCHAR(200))");
+
+        database.QueryData("CREATE TABLE IF NOT EXISTS Stores(" +
+                "StoreId INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "StoreName NVARCHAR(200), " +
+                "Address NVARCHAR(200), " +
+                "OpenTime VARCHAR(10), " +
+                "CloseTime VARCHAR(10), " +
+                "CategoryId INTEGER, " +
+                "CoverPhoto Blob, " +
+                "StoreRateStar FLOAT, " +
+                "Email VARCHAR(200), " +
+                "FOREIGN KEY (Email) REFERENCES Users (Email), " +
+                "FOREIGN KEY (CategoryId) REFERENCES Categories (CategoryId))");
+
+        database.QueryData("CREATE TABLE IF NOT EXISTS Foods(" +
+                "FoodId INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "FoodName NVARCHAR(200), " +
+                "Photo Blob, " +
+                "Price FLOAT, " +
+                "StoreId INTEGER, " +
+                "FOREIGN KEY (StoreId) REFERENCES Stores (StoreId))");
+
+        database.QueryData("CREATE TABLE IF NOT EXISTS Comments(" +
+                "CommentId INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "CommentContent NVARCHAR(255), " +
+                "StoreId INTEGER, " +
+                "Email VARCHAR(200), " +
+                "FOREIGN KEY (StoreId) REFERENCES Stores (StoreId), " +
+                "FOREIGN KEY (Email) REFERENCES Users (Email))");
+
+        database.QueryData("CREATE TABLE IF NOT EXISTS RatingStars(" +
+                "RatingStarId INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "RateStar FLOAT, " +
+                "StoreId INTEGER, " +
+                "Email VARCHAR(200), " +
+                "FOREIGN KEY (StoreId) REFERENCES Stores (StoreId), " +
+                "FOREIGN KEY (Email) REFERENCES Users (Email))");
+
+        database.QueryData("CREATE TABLE IF NOT EXISTS CartItems(" +
+                "FoodId INTEGER, " +
+                "Email VARCHAR(200), " +
+                "Quantity INTEGER, " +
+                "FOREIGN KEY (FoodId) REFERENCES Foods (FoodId), " +
+                "FOREIGN KEY (Email) REFERENCES Users (Email), " +
+                "PRIMARY KEY (FoodId, Email))");
+
+        database.QueryData("CREATE TABLE IF NOT EXISTS Orders(" +
+                "OrderId INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "CreateTime DATETIME, " +
+                "Total FLOAT, " +
+                "Email VARCHAR(200), " +
+                "StoreId INTEGER, " +
+                "FOREIGN KEY (StoreId) REFERENCES Stores (StoreId), " +
+                "FOREIGN KEY (Email) REFERENCES Users (Email))");
+
+        database.QueryData("CREATE TABLE IF NOT EXISTS OrderDetails(" +
+                "OrderId INTEGER, " +
+                "FoodId INTEGER, " +
+                "Quantity INTEGER, " +
+                "UnitPrice FLOAT, " +
+                "FOREIGN KEY (OrderId) REFERENCES Orders (OrderId), " +
+                "FOREIGN KEY (FoodId) REFERENCES Foods (FoodId), " +
+                "PRIMARY KEY (OrderId, FoodId))");
+
+        //insert questions data
+//        database.QueryData("INSERT INTO SecurityQuestions VALUES(null, 'Tên con vật yêu thích?')");
+//        database.QueryData("INSERT INTO SecurityQuestions VALUES(null, 'Trường cấp 1 của bạn tên gì?')");
+//        database.QueryData("INSERT INTO SecurityQuestions VALUES(null, 'Người bạn yêu quý nhất?')");
+//        database.QueryData("INSERT INTO SecurityQuestions VALUES(null, 'Trò chơi bạn thích nhất?')");
+//        database.QueryData("INSERT INTO SecurityQuestions VALUES(null, 'Nơi để lại kỉ niệm khó quên nhất?')");
+
+        //insert Categories data
+//        database.QueryData("INSERT INTO Categories VALUES(null, 'Luxury')");
+//        database.QueryData("INSERT INTO Categories VALUES(null, 'Restaurant')");
+//        database.QueryData("INSERT INTO Categories VALUES(null, 'Vegetarian')");
+//        database.QueryData("INSERT INTO Categories VALUES(null, 'Bistro')");
+//        database.QueryData("INSERT INTO Categories VALUES(null, 'Boozer')");
+//        database.QueryData("INSERT INTO Categories VALUES(null, 'Buffet')");
+//        database.QueryData("INSERT INTO Categories VALUES(null, 'Street food')");
+//        database.QueryData("INSERT INTO Categories VALUES(null, 'Coffee/Dessert')");
+//        database.QueryData("INSERT INTO Categories VALUES(null, 'Bar/Pub')");
+//        database.QueryData("INSERT INTO Categories VALUES(null, 'Beer club')");
+
+        //insert Stores data
+
+
+        //insert Users data
+//        database.QueryData("INSERT INTO Users VALUES('1@gmail.com', '1', '1', null, null, null, null, 1, 'An Hội', 2)");
+//        database.QueryData("INSERT INTO Users VALUES('2@gmail.com', '2', '2', null, null, null, null, 1, 'An Hội', 2)");
+//        database.QueryData("INSERT INTO Users VALUES('3@gmail.com', '3', '3', null, null, null, null, 1, 'An Hội', 2)");
+//        database.QueryData("INSERT INTO Users VALUES('4@gmail.com', '4', '4', null, null, null, null, 1, 'An Hội', 2)");
+//        database.QueryData("INSERT INTO Users VALUES('5@gmail.com', '5', '5', null, null, null, null, 1, 'An Hội', 2)");
+//        database.QueryData("INSERT INTO Users VALUES('6@gmail.com', '6', '6', null, null, null, null, 1, 'An Hội', 2)");
+//        database.QueryData("INSERT INTO Users VALUES('7@gmail.com', '7', '7', null, null, null, null, 1, 'An Hội', 2)");
+//        database.QueryData("INSERT INTO Users VALUES('8@gmail.com', '8', '8', null, null, null, null, 1, 'An Hội', 2)");
+//        database.QueryData("INSERT INTO Users VALUES('9@gmail.com', '9', '9', null, null, null, null, 1, 'An Hội', 2)");
+//        database.QueryData("INSERT INTO Users VALUES('10@gmail.com', '10', '10', null, null, null, null, 1, 'An Hội', 2)");
+
+        //delete data
+//        database.QueryData("DELETE FROM SecurityQuestions WHERE QuestionId > 4");
     }
 }

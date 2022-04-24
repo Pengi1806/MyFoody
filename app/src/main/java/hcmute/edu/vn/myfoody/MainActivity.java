@@ -13,6 +13,9 @@ public class MainActivity extends AppCompatActivity {
     TextView txtForgotPassword;
     Button btnLogin;
     TextView txtSignUp;
+    //
+    Button btnThemQuanAn;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +25,11 @@ public class MainActivity extends AppCompatActivity {
         txtForgotPassword = (TextView) findViewById(R.id.forgotPassword);
         btnLogin = (Button) findViewById(R.id.buttonLogin);
         txtSignUp = (TextView) findViewById(R.id.textSignUp);
+        //
+        btnThemQuanAn = (Button) findViewById(R.id.buttonThemQuanAn);
 
+
+        //
         txtForgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -43,6 +50,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, SignUp1.class);
+                startActivity(intent);
+            }
+        });
+
+        //
+        btnThemQuanAn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this , ThemQuanAnActivity.class);
                 startActivity(intent);
             }
         });

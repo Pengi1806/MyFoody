@@ -8,6 +8,16 @@
     android:background="@color/white"
     tools:context=".MainActivity">
 
+    <Button
+        android:id="@+id/buttonThemQuanAn"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:background="#FFBFBF"
+        android:paddingTop="10dp"
+        android:text="Thêm Quán Ăn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ImageView
         android:layout_marginTop="10dp"
         android:id="@+id/imgLogo"

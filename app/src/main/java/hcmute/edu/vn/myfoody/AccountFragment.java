@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class AccountFragment extends Fragment {
@@ -27,6 +28,7 @@ public class AccountFragment extends Fragment {
         txtDoiMatKhau = (TextView) view.findViewById(R.id.DoiMatKhau);
         txtChuQuan = (TextView) view.findViewById(R.id.ChuQuan);
         txtDangXuat = (TextView) view.findViewById(R.id.DangXuat);
+
 
         txtThongTinCaNhan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,5 +61,6 @@ public class AccountFragment extends Fragment {
             }
         });
         return view;
+
     }
 }

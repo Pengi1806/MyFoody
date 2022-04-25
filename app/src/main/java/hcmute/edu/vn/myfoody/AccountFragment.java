@@ -100,7 +100,6 @@ public class AccountFragment extends Fragment {
                 dialog.show();
             }
         });
-        Log.d("TAG", "onCreateView: ");
         return view;
     }
 

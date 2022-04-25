@@ -62,6 +62,7 @@ public class ForgotPassword2 extends AppCompatActivity {
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 Intent intent = new Intent(ForgotPassword2.this, MainActivity.class);
                                 startActivity(intent);
+                                finish();
                             }
                         });
                         builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
@@ -69,6 +70,7 @@ public class ForgotPassword2 extends AppCompatActivity {
                             public void onCancel(DialogInterface dialogInterface) {
                                 Intent intent = new Intent(ForgotPassword2.this, MainActivity.class);
                                 startActivity(intent);
+                                finish();
                             }
                         });
                         AlertDialog dialog = builder.create();

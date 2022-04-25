@@ -5,50 +5,28 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
     Database database;
+
     TextView txtForgotPassword;
     Button btnLogin;
     TextView txtSignUp;
+    EditText edtTextEmailDangNhap;
+    EditText edtTextPasswordDangNhap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        txtForgotPassword = (TextView) findViewById(R.id.forgotPassword);
-        btnLogin = (Button) findViewById(R.id.buttonLogin);
-        txtSignUp = (TextView) findViewById(R.id.textSignUp);
-
-        txtForgotPassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this,ForgotPassword1.class);
-                startActivity(intent);
-            }
-        });
-
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this,HomeActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        txtSignUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, SignUp1.class);
-                startActivity(intent);
-            }
-        });
         // Tạo database
         database = new Database(MainActivity.this, "foody.sqlite", null, 1);
 
@@ -173,5 +151,55 @@ public class MainActivity extends AppCompatActivity {
 
         //delete data
 //        database.QueryData("DELETE FROM SecurityQuestions WHERE QuestionId > 4");
+
+        txtForgotPassword = (TextView) findViewById(R.id.forgotPassword);
+        btnLogin = (Button) findViewById(R.id.buttonLogin);
+        txtSignUp = (TextView) findViewById(R.id.textSignUp);
+        edtTextEmailDangNhap = (EditText) findViewById(R.id.editEmailDangNhap);
+        edtTextPasswordDangNhap = (EditText) findViewById(R.id.editPasswordDangNhap);
+
+        txtForgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this,ForgotPassword1.class);
+                startActivity(intent);
+            }
+        });
+
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String Email = edtTextEmailDangNhap.getText().toString().trim();
+                String Password = edtTextPasswordDangNhap.getText().toString();
+                String PasswordSqlite ="";
+                if(Email.equals("") == false && Password.equals("") == false) {
+                    Cursor dataUsers = database.GetData("SELECT * FROM Users WHERE Email = '" + Email + "'");
+                    if(dataUsers.getCount() == 0){
+                        Toast.makeText(MainActivity.this, "Email không tồn tại", Toast.LENGTH_SHORT).show();
+                    } else {
+                        while (dataUsers.moveToNext()){
+                            PasswordSqlite = dataUsers.getString(1);
+                        }
+                        if (PasswordSqlite.equals(Password)) {
+                            Intent intent = new Intent(MainActivity.this,HomeActivity.class);
+                            intent.putExtra("Email", Email);
+                            startActivity(intent);
+                        } else {
+                            Toast.makeText(MainActivity.this, "Mật khẩu không đúng", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                } else {
+                    Toast.makeText(MainActivity.this, "Email hoặc Password chưa nhập!!!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        txtSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, SignUp1.class);
+                startActivity(intent);
+            }
+        });
     }
 }

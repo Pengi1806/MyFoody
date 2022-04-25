@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    Database database;
+    public static Database database;
 
     TextView txtForgotPassword;
     Button btnLogin;

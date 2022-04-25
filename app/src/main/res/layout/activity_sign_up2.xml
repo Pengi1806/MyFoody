@@ -18,7 +18,7 @@
         app:layout_constraintLeft_toLeftOf="parent"/>
 
     <TextView
-        android:id="@+id/TextSecurityQuestion"
+        android:id="@+id/TextSignUpSecurityQuestion"
         android:layout_marginTop="50dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -32,7 +32,7 @@
         android:textColor="@color/black" />
 
     <Spinner
-        android:id="@+id/spinner1"
+        android:id="@+id/spinnerSignUpSecurityQuestions"
 
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"
@@ -41,7 +41,7 @@
         android:spinnerMode="dropdown"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TextSecurityQuestion"/>
+        app:layout_constraintTop_toBottomOf="@+id/TextSignUpSecurityQuestion"/>
 
     <EditText
         android:id="@+id/editSecurityAnswer"
@@ -53,7 +53,7 @@
         android:drawableLeft="@drawable/ic_baseline_info_24"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner1"/>
+        app:layout_constraintTop_toBottomOf="@+id/spinnerSignUpSecurityQuestions"/>
     <Button
         android:id="@+id/btnCreateAccount"
         android:layout_marginTop="20dp"

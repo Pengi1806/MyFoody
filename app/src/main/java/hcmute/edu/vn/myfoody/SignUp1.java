@@ -7,11 +7,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class SignUp1 extends AppCompatActivity {
+
+    EditText edtName, edtEmail, edtPassword, edtConfirmPassword, edtPhone;
 
     TextView txtAHACLogin;
     Button btnNext;
@@ -22,6 +26,12 @@ public class SignUp1 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up1);
 
+        edtName = (EditText) findViewById(R.id.editName);
+        edtEmail = (EditText) findViewById(R.id.editEmail);
+        edtPassword = (EditText) findViewById(R.id.editPassword);
+        edtConfirmPassword = (EditText) findViewById(R.id.editConfirmPassword);
+        edtPhone = (EditText) findViewById(R.id.editPhone);
+
         btnNext = (Button) findViewById(R.id.btnNext);
         txtAHACLogin = (TextView) findViewById(R.id.textAHACLogin);
         imgBackSignUp1 = (ImageView) findViewById(R.id.imgBackSignUp1);
@@ -30,6 +40,10 @@ public class SignUp1 extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(SignUp1.this,SignUp2.class);
+                intent.putExtra("Name",edtName.getText().toString().trim());
+                intent.putExtra("Email",edtEmail.getText().toString().trim());
+                intent.putExtra("Password",edtPassword.getText().toString().trim());
+                intent.putExtra("Phone",edtPhone.getText().toString().trim());
                 startActivity(intent);
             }
         });

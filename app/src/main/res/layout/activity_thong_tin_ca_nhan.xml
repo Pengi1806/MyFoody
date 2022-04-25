@@ -31,11 +31,12 @@
             android:textColor="@color/white"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
+
     </RelativeLayout>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/containerImageThongTinCaNhan"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:layout_width="200dp"
         android:layout_height="200dp"
         app:cardCornerRadius="100dp"
@@ -50,9 +51,68 @@
             android:layout_height="wrap_content" />
     </androidx.cardview.widget.CardView>
 
+    <androidx.cardview.widget.CardView
+        android:id="@+id/containerImageEdit"
+        android:layout_marginRight="10dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:cardCornerRadius="25dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/containerImageThongTinCaNhan">
+
+        <ImageButton
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:id="@+id/imgEdit"
+            android:src="@drawable/ic_edit"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/containerImageConfirm"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:cardCornerRadius="25dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/containerImageEdit">
+
+        <ImageButton
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:id="@+id/imgConfirm"
+            android:src="@drawable/ic_check"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/containerImageCancel"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:cardCornerRadius="25dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/containerImageConfirm">
+
+        <ImageButton
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:id="@+id/imgCancel"
+            android:src="@drawable/ic_cancel"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </androidx.cardview.widget.CardView>
+
     <LinearLayout
         android:id="@+id/containerFullName"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="25dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
@@ -60,88 +120,100 @@
         app:layout_constraintTop_toBottomOf="@id/containerImageThongTinCaNhan">
         <TextView
             android:id="@+id/textViewFullNameTitle"
-            android:layout_weight="3"
-            android:text="Full Name"
-            android:textSize="28sp"
+            android:layout_weight="2.1"
+            android:gravity="center_vertical"
+            android:text="Name"
+            android:textSize="20sp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
-        <TextView
-            android:id="@+id/txtViewFullName"
-            android:layout_weight="3"
+        <EditText
+            android:id="@+id/editTextFullName"
+            android:layout_weight="0.9"
             android:textColor="@color/black"
+            style="@style/Widget.Material3.TextInputEditText.FilledBox"
             android:text="Nhật Hào"
-            android:textSize="28sp"
+            android:textSize="20sp"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-        <ImageButton
-            android:id="@+id/imgEditFullName"
-            android:layout_weight="4"
-            android:src="@drawable/ic_edit"
-            android:background="@color/white"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/containerSex"
+        android:id="@+id/containerGender"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="10dp"
         android:background="@color/white"
         app:layout_constraintTop_toBottomOf="@id/containerFullName">
         <TextView
-            android:id="@+id/textViewSexTitle"
-            android:layout_weight="3"
-            android:text="Sex"
-            android:textSize="28sp"
+            android:id="@+id/textViewGenderTitle"
+            android:layout_weight="2.1"
+            android:gravity="center_vertical"
+            android:text="Gender"
+            android:textSize="20sp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
-        <TextView
-            android:id="@+id/textViewSex"
-            android:layout_weight="3"
+        <EditText
+            android:id="@+id/editTextGender"
+            android:layout_weight="0.9"
             android:textColor="@color/black"
+            style="@style/Widget.Material3.TextInputEditText.FilledBox"
             android:text="Nam"
-            android:textSize="28sp"
+            android:textSize="20sp"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-        <ImageButton
-            android:id="@+id/imgEditSex"
-            android:layout_weight="4"
-            android:src="@drawable/ic_edit"
-            android:background="@color/white"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
     </LinearLayout>
     <LinearLayout
-        android:id="@+id/containerBirthdate"
+        android:id="@+id/containerPhone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="10dp"
         android:background="@color/white"
-        app:layout_constraintTop_toBottomOf="@id/containerSex">
+        app:layout_constraintTop_toBottomOf="@id/containerGender">
         <TextView
-            android:id="@+id/textViewBirthdateTitle"
-            android:layout_weight="3"
-            android:text="Birthdate"
-            android:textSize="28sp"
+            android:id="@+id/textViewPhoneTitle"
+            android:layout_weight="2.1"
+            android:text="Phone"
+            android:gravity="center_vertical"
+            android:textSize="20sp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
-        <TextView
-            android:id="@+id/textViewBirthdate"
-            android:layout_weight="3"
+        <EditText
+            android:id="@+id/editTextPhone"
+            android:layout_weight="0.9"
             android:textColor="@color/black"
+            style="@style/Widget.Material3.TextInputEditText.FilledBox"
             android:text="18/06/1999"
-            android:textSize="28sp"
+            android:textSize="20sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-        <ImageButton
-            android:id="@+id/imgEditBirthdate"
-            android:layout_weight="4"
-            android:src="@drawable/ic_edit"
-            android:background="@color/white"
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/containerAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/containerPhone">
+        <TextView
+            android:id="@+id/textViewAddressTitle"
+            android:gravity="center_vertical"
+            android:layout_weight="2.1"
+            android:text="Address"
+            android:textSize="20sp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
+        <EditText
+            android:id="@+id/editTextAddress"
+            android:layout_weight="0.9"
+            android:textColor="@color/black"
+            android:text="Đường số 21, Quận Gò Vấp, Tp.hcm"
+            android:textSize="20sp"
+            style="@style/Widget.Material3.TextInputEditText.FilledBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

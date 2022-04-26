@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -23,6 +24,7 @@ public class SignUp2 extends AppCompatActivity {
     Spinner spinnerSecurityQuestions;
     int QuestionID;
     TextView textViewSecurityQuestion;
+    EditText editSecurityAnswer;
 
     Database database;
 
@@ -42,6 +44,7 @@ public class SignUp2 extends AppCompatActivity {
         imgBackSignUp2 = (ImageView) findViewById(R.id.imgBackSignUp2);
         spinnerSecurityQuestions = (Spinner) findViewById(R.id.spinnerSignUpSecurityQuestions);
         textViewSecurityQuestion = (TextView) findViewById(R.id.TextSignUpSecurityQuestion);
+        editSecurityAnswer = (EditText) findViewById(R.id.editSecurityAnswer);
 
         ArrayList<String> arraySecurityQuestions = new ArrayList<String>();
         arraySecurityQuestions.add("[Choose your security question]");
@@ -61,17 +64,28 @@ public class SignUp2 extends AppCompatActivity {
         btnCreateAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MainActivity.database.INSERT_USER(
-                        Email,
-                        Password,
-                        Name,
-                        Phone,
-                        textViewSecurityQuestion.getText().toString().trim(),
-                        QuestionID
-                );
-                Toast.makeText(SignUp2.this, "Đăng ký thành công!", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(SignUp2.this,MainActivity.class);
-                startActivity(intent);
+                String SecurityQuestion = spinnerSecurityQuestions.getSelectedItem().toString().trim();
+                String SecurityAnswer = editSecurityAnswer.getText().toString().trim();
+                if (SecurityQuestion.equals("[Choose your security question]") == false) {
+                    if(SecurityAnswer.equals("") == false) {
+                        MainActivity.database.INSERT_USER(
+                                Email,
+                                Password,
+                                Name,
+                                Phone,
+                                SecurityAnswer,
+                                QuestionID
+                        );
+                        Toast.makeText(SignUp2.this, "Đăng ký thành công!", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(SignUp2.this, MainActivity.class);
+                        startActivity(intent);
+                    }
+                    else {
+                        Toast.makeText(SignUp2.this, "Cần nhập câu trả lời", Toast.LENGTH_SHORT).show();
+                    }
+                }else{
+                    Toast.makeText(SignUp2.this, "Cần chọn câu hỏi bảo mật", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

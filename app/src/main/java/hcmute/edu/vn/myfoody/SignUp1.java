@@ -3,6 +3,7 @@ package hcmute.edu.vn.myfoody;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -20,6 +21,7 @@ public class SignUp1 extends AppCompatActivity {
     TextView txtAHACLogin;
     Button btnNext;
     ImageView imgBackSignUp1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,12 +41,32 @@ public class SignUp1 extends AppCompatActivity {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(SignUp1.this,SignUp2.class);
-                intent.putExtra("Name",edtName.getText().toString().trim());
-                intent.putExtra("Email",edtEmail.getText().toString().trim());
-                intent.putExtra("Password",edtPassword.getText().toString().trim());
-                intent.putExtra("Phone",edtPhone.getText().toString().trim());
-                startActivity(intent);
+                String Name = edtName.getText().toString().trim();
+                String Email = edtEmail.getText().toString().trim();
+                String Password = edtPassword.getText().toString();
+                String Phone = edtPhone.getText().toString().trim();
+                String ConfirmPassword = edtConfirmPassword.getText().toString();
+                if(Name.equals("") == false && Email.equals("") == false && Password.equals("") == false
+                        && ConfirmPassword.equals("") == false && Phone.equals("") == false) {
+                    if(Password.equals(ConfirmPassword) == true) {
+                        Cursor dataUsers = MainActivity.database.GetData("SELECT * FROM Users WHERE Email = '" + Email + "'");
+                        if(dataUsers.getCount() == 0) {
+                            Intent intent = new Intent(SignUp1.this, SignUp2.class);
+                            intent.putExtra("Name", Name);
+                            intent.putExtra("Email", Email);
+                            intent.putExtra("Password", Password);
+                            intent.putExtra("Phone", Phone);
+                            startActivity(intent);
+                        } else {
+                            Toast.makeText(SignUp1.this, "Email đã tồn tại", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    else {
+                        Toast.makeText(SignUp1.this, "Mật khẩu xác nhận không trùng khớp", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(SignUp1.this, "Cần nhập đủ thông tin", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

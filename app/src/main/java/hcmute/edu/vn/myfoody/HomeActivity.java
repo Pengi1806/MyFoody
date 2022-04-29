@@ -17,15 +17,18 @@ public class HomeActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     HomeFragment homeFragment = new HomeFragment();
     AccountFragment accountFragment = new AccountFragment();
+    Bundle bundle = new Bundle();
 
-    TextView txtViewThongTinCaNhan;
-    TextView txtViewDoiMatKhau;
-    TextView txtViewChuQuan;
+    String Email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        Email = getIntent().getStringExtra("Email");
+
+        bundle.putString("Email", Email);
 
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
 
@@ -39,6 +42,7 @@ public class HomeActivity extends AppCompatActivity {
                         getSupportFragmentManager().beginTransaction().replace(R.id.container, homeFragment).commit();
                         return true;
                     case R.id.account:
+                        accountFragment.setArguments(bundle);
                         getSupportFragmentManager().beginTransaction().replace(R.id.container, accountFragment).commit();
                         return true;
                 }

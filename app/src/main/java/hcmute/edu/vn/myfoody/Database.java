@@ -19,6 +19,13 @@ public class Database extends SQLiteOpenHelper {
         SQLiteDatabase database = getWritableDatabase();
         database.execSQL(sql);
     }
+
+    //Truy vấn có trả kết quả: SELECT
+    public Cursor GetData(String sql) {
+        SQLiteDatabase database = getReadableDatabase();
+        return database.rawQuery(sql, null);
+    }
+
     public void INSERT_USER(String Email, String Password, String Name, String Phone, String SecurityAnswer, Integer QuestionId){
         SQLiteDatabase database = getWritableDatabase();
         String sql = "INSERT INTO Users VALUES(?, ?, ?, null, null, ?, null, 2, ?, ?)";
@@ -34,13 +41,20 @@ public class Database extends SQLiteOpenHelper {
 
         statement.executeInsert();
     }
-    //Truy vấn có trả kết quả: SELECT
-    public Cursor GetData(String sql) {
-        SQLiteDatabase database = getReadableDatabase();
-        return database.rawQuery(sql, null);
-    }
+
     
-//    public void insertStore(String name, String address, String openTime, String closeTime, Integer categoryId, byte[] coverPhoto, Float rateStar, )
+    public void updatePhotoUser(byte[] image, String Email) {
+        SQLiteDatabase database = getWritableDatabase();
+        String sql = "UPDATE Users SET Avatar = ? WHERE Email = ?";
+
+        SQLiteStatement statement = database.compileStatement(sql);
+        statement.clearBindings();
+
+        statement.bindBlob(1, image);
+        statement.bindString(2, Email);
+
+        statement.executeUpdateDelete();
+    }
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {

@@ -56,12 +56,13 @@ public class ForgotPassword2 extends AppCompatActivity {
                         //Hiện thông báo
                         AlertDialog.Builder builder = new AlertDialog.Builder(ForgotPassword2.this);
                         builder.setMessage("Mật khẩu của bạn đã được thay đổi");
-                        builder.setTitle("Thông báo");
+                        builder.setTitle("THÔNG BÁO");
                         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 Intent intent = new Intent(ForgotPassword2.this, MainActivity.class);
                                 startActivity(intent);
+                                finish();
                             }
                         });
                         builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
@@ -69,6 +70,7 @@ public class ForgotPassword2 extends AppCompatActivity {
                             public void onCancel(DialogInterface dialogInterface) {
                                 Intent intent = new Intent(ForgotPassword2.this, MainActivity.class);
                                 startActivity(intent);
+                                finish();
                             }
                         });
                         AlertDialog dialog = builder.create();

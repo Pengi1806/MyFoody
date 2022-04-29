@@ -6,19 +6,48 @@
 
     <ImageView
         android:id="@+id/imageViewFoodUpdate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:src="@mipmap/ic_launcher"
+        android:layout_marginTop="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_width="100dp"
+        android:layout_height="100dp" />
 
-<!--    <EditText-->
-<!--&lt;!&ndash;        android:id="@+id/"&ndash;&gt;-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"/>-->
     <EditText
+        android:id="@+id/editTextFoodNameUpdate"
+        android:hint="Name"
+        android:maxLines="1"
+        android:inputType="text"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginTop="50dp"
+        android:layout_marginHorizontal="20dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageViewFoodUpdate"/>
+
+    <EditText
+        android:id="@+id/editTextPriceUpdate"
+        android:hint="Price"
+        android:maxLines="1"
+        android:inputType="numberDecimal"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTextFoodNameUpdate"/>
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
+        android:id="@+id/buttonUpdateFood"
+        android:text="UPDATE"
+        android:layout_marginTop="40dp"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:background="#70ad47"
+        android:layout_centerHorizontal="true"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTextPriceUpdate"/>
 </RelativeLayout>

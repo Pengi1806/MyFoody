@@ -45,6 +45,7 @@ public class HomeFragment extends Fragment {
         ArrayAdapter arrayAdapter = new ArrayAdapter(view.getContext(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, arrayCategories);
         arrayAdapter.setDropDownViewResource(androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
         spinnerCategoriesHome.setAdapter(arrayAdapter);
+
         return view;
     }
 }

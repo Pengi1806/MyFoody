@@ -1,25 +1,40 @@
 package hcmute.edu.vn.myfoody;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 public class ChuQuanActivity extends AppCompatActivity {
@@ -37,6 +52,8 @@ public class ChuQuanActivity extends AppCompatActivity {
     String StoreName;
 
     Database database;
+
+    final int REQUEST_CODE_GALLERY = 888;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +81,8 @@ public class ChuQuanActivity extends AppCompatActivity {
         foodArrayList = new ArrayList<Food>();
         adapter = new FoodListAdapter(ChuQuanActivity.this, R.layout.food_items, foodArrayList);
         gridViewFood.setAdapter(adapter);
+
+
         Cursor dataFood = database.GetData("SELECT * FROM Foods WHERE StoreId = " + StoreId);
         foodArrayList.clear();
         while (dataFood.moveToNext()){
@@ -100,7 +119,7 @@ public class ChuQuanActivity extends AppCompatActivity {
 
         gridViewFood.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long l) {
                 CharSequence[] items = {"Update", "Delete"};
                 AlertDialog.Builder dialog = new AlertDialog.Builder(ChuQuanActivity.this);
 
@@ -109,9 +128,21 @@ public class ChuQuanActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         if (i == 0) {
-
+                            //Update Food
+                            Cursor dataFood = database.GetData("SELECT FoodId FROM Foods WHERE StoreId = " + StoreId);
+                            ArrayList<Integer> arrId = new ArrayList<Integer>();
+                            while (dataFood.moveToNext()) {
+                                arrId.add(dataFood.getInt(0));
+                            }
+                            showDialogUpdate(ChuQuanActivity.this, arrId.get(position));
                         } else {
-
+                            //Delete Food
+                            Cursor dataFood = database.GetData("SELECT FoodId FROM Foods WHERE StoreId = " + StoreId);
+                            ArrayList<Integer> arrId = new ArrayList<Integer>();
+                            while (dataFood.moveToNext()) {
+                                arrId.add(dataFood.getInt(0));
+                            }
+                            showDiaglogDelete(arrId.get(position));
                         }
                     }
                 });
@@ -121,9 +152,162 @@ public class ChuQuanActivity extends AppCompatActivity {
         });
     }
 
-    private void showDialogUpdate(Activity activity) {
+    ImageView imageViewFood;
+    String FoodNameDialog;
+    Float FoodPriceDialog;
+    byte[] PhotoDialog;
 
+    private void showDiaglogDelete(Integer foodId) {
+        AlertDialog.Builder dialogDelete = new AlertDialog.Builder(ChuQuanActivity.this);
+
+        dialogDelete.setTitle("Warning!!");
+        dialogDelete.setMessage("Bạn muốn xóa món ăn này khỏi thực đơn?");
+
+        dialogDelete.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                try {
+                    database.deleteFood(foodId);
+                    dialogInterface.dismiss();
+                    Toast.makeText(ChuQuanActivity.this, "Delete successfully!!!", Toast.LENGTH_SHORT).show();
+                } catch (Exception error) {
+                    Log.e("Delete error", error.getMessage());
+                }
+                updateFoodList();
+            }
+        });
+
+        dialogDelete.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+
+        dialogDelete.show();
+    }
+
+    private void showDialogUpdate(Activity activity, Integer foodId) {
         Dialog dialog = new Dialog(activity);
-//        dialog.setContentView();
+        dialog.setContentView(R.layout.update_food_activity);
+        dialog.setTitle("Update");
+
+        imageViewFood = (ImageView) dialog.findViewById(R.id.imageViewFoodUpdate);
+        EditText editTextName = (EditText) dialog.findViewById(R.id.editTextFoodNameUpdate);
+        EditText editTextPrice = (EditText) dialog.findViewById(R.id.editTextPriceUpdate);
+        Button buttonUpdate = (Button) dialog.findViewById(R.id.buttonUpdateFood);
+
+        Cursor dataFood = database.GetData("SELECT * FROM Foods WHERE FoodId = " + foodId);
+        while (dataFood.moveToNext()){
+            FoodNameDialog = dataFood.getString(1);
+            PhotoDialog = dataFood.getBlob(2);
+            FoodPriceDialog = dataFood.getFloat(3);
+        }
+
+        editTextName.setText(FoodNameDialog);
+        editTextPrice.setText(FoodPriceDialog.toString());
+        // Xử lý Photo
+        if (PhotoDialog != null){
+            Bitmap bitmap = BitmapFactory.decodeByteArray(PhotoDialog, 0, PhotoDialog.length);
+            imageViewFood.setImageBitmap(bitmap);
+        }
+
+        //set width for dialog
+        int width = (int) (activity.getResources().getDisplayMetrics().widthPixels * 0.95);
+        //set height for dialog
+        int height = (int) (activity.getResources().getDisplayMetrics().heightPixels * 0.7);
+        dialog.getWindow().setLayout(width, height);
+        dialog.show();
+
+        imageViewFood.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ActivityCompat.requestPermissions(
+                        ChuQuanActivity.this,
+                        new String[] {Manifest.permission.READ_EXTERNAL_STORAGE},
+                        REQUEST_CODE_GALLERY
+                );
+            }
+        });
+
+        buttonUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    database.updateFood(
+                            editTextName.getText().toString().trim(),
+                            imageViewToByte(imageViewFood),
+                            Float.valueOf(editTextPrice.getText().toString().trim()),
+                            foodId
+                    );
+                    dialog.dismiss();
+                    Toast.makeText(ChuQuanActivity.this, "Update successfully!!!", Toast.LENGTH_SHORT).show();
+                } catch (Exception error) {
+                    Log.e("Update error", error.getMessage());
+                }
+                updateFoodList();
+            }
+        });
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == REQUEST_CODE_GALLERY) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                intent.setType("image/*");
+                startActivityForResult(intent, REQUEST_CODE_GALLERY);
+            } else {
+                Toast.makeText(getApplicationContext(), "You don't have permission to access file location!", Toast.LENGTH_SHORT).show();
+            }
+            return;
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (requestCode == REQUEST_CODE_GALLERY && resultCode == RESULT_OK && data != null) {
+
+            Uri uri = data.getData();
+
+            try {
+                InputStream inputStream = getContentResolver().openInputStream(uri);
+
+                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                imageViewFood.setImageBitmap(bitmap);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private byte[] imageViewToByte(ImageView image) {
+        Bitmap bitmap = ((BitmapDrawable)image.getDrawable()).getBitmap();
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byte[] byteArray = stream.toByteArray();
+        return byteArray;
+    }
+
+    private void updateFoodList(){
+        Cursor dataFood = database.GetData("SELECT * FROM Foods WHERE StoreId = " + StoreId);
+        foodArrayList.clear();
+        while (dataFood.moveToNext()){
+            Integer FoodId = dataFood.getInt(0);
+            String FoodName = dataFood.getString(1);
+            byte[] Photo = dataFood.getBlob(2);
+            Float Price = dataFood.getFloat(3);
+
+            foodArrayList.add(new Food(FoodId, FoodName, Price, Photo));
+        }
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    protected void onResume() {
+        updateFoodList();
+        super.onResume();
     }
 }

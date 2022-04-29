@@ -56,21 +56,6 @@ public class Database extends SQLiteOpenHelper {
         statement.executeInsert();
     }
 
-    
-    public void updatePhotoUser(byte[] image, String Email) {
-        SQLiteDatabase database = getWritableDatabase();
-        String sql = "UPDATE Users SET Avatar = ? WHERE Email = ?";
-
-        SQLiteStatement statement = database.compileStatement(sql);
-        statement.clearBindings();
-
-        statement.bindBlob(1, image);
-        statement.bindString(2, Email);
-
-        statement.execute();
-        database.close();
-    }
-
     public void updateFood(String foodName, byte[] image, Float price, Integer foodId) {
         SQLiteDatabase database = getWritableDatabase();
         String sql = "UPDATE Foods SET FoodName = ?, Photo = ?, Price = ? WHERE FoodId = ?";
@@ -86,6 +71,34 @@ public class Database extends SQLiteOpenHelper {
         statement.execute();
         database.close();
     }
+
+    public void deleteFood(Integer foodId) {
+        SQLiteDatabase database = getWritableDatabase();
+        String sql = "DELETE FROM Foods WHERE FoodId = ?";
+
+        SQLiteStatement statement = database.compileStatement(sql);
+        statement.clearBindings();
+        statement.bindLong(1, foodId);
+
+        statement.execute();
+        database.close();
+    }
+
+    public void updatePhotoUser(byte[] image, String Email) {
+        SQLiteDatabase database = getWritableDatabase();
+        String sql = "UPDATE Users SET Avatar = ? WHERE Email = ?";
+
+        SQLiteStatement statement = database.compileStatement(sql);
+        statement.clearBindings();
+
+        statement.bindBlob(1, image);
+        statement.bindString(2, Email);
+
+        statement.execute();
+        database.close();
+    }
+
+
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {

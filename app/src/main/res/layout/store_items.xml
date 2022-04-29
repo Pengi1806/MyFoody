@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ImageView
+        android:id="@+id/imageViewStoreGridView"
+        android:src="@mipmap/ic_launcher"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_width="170dp"
+        android:layout_height="170dp"/>
+
+    <TextView
+        android:id="@+id/textViewStoreNameGridView"
+        android:text="Store name"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/holo_blue_dark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:layout_alignLeft="@+id/imageViewStoreGridView"
+        android:layout_alignRight="@+id/imageViewStoreGridView"
+        android:layout_below="@+id/imageViewStoreGridView"/>
+</RelativeLayout>

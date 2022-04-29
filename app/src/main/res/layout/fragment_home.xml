@@ -24,17 +24,20 @@
             android:background="@color/white">
 
             <EditText
+                android:id="@+id/EditTextSearchHomeFragment"
                 android:layout_weight="8"
-                android:hint="Bún bò, Võ Văn Ngân"
+                android:hint="Tên quán hoặc địa chỉ"
                 android:maxLines="1"
+                android:inputType="text"
                 android:textStyle="bold"
                 android:textColor="@color/black"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:focusable="false"
                 android:background="@android:color/transparent"/>
 
-            <ImageView
+            <ImageButton
+                android:background="@color/white"
+                android:id="@+id/ImageButtonSearchHomeFragment"
                 android:src="@drawable/ic_search"
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
@@ -47,22 +50,21 @@
         android:layout_height="660dp"
         app:layout_constraintTop_toBottomOf="@id/actionBarHome"
         android:paddingTop="10dp"
-        android:orientation="vertical"
-        android:weightSum="10">
+        android:orientation="vertical">
 
         <Spinner
             android:id="@+id/dropdownCategoriesHome"
             android:layout_width="match_parent"
             style="@android:style/Widget.Spinner.DropDown"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
+            android:layout_height="50dp" />
 
         <GridView
             android:id="@+id/gridViewStoreHome"
             android:numColumns="2"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="9"/>
+            android:layout_height="470dp"/>
+
+
     </LinearLayout>
 
 

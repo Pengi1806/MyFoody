@@ -32,25 +32,46 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgLogo"/>
 
-    <EditText
-        android:id="@+id/editEmailDangNhap"
-        android:hint="Email"
-        android:textSize="22sp"
-        android:layout_marginTop="15dp"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/editEmailLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/ic_email"
-        app:layout_constraintTop_toBottomOf="@id/textWelcomeBack"/>
+        android:layout_marginTop="20dp"
+        app:startIconDrawable="@drawable/ic_email"
+        app:layout_constraintTop_toBottomOf="@id/textWelcomeBack">
 
-    <EditText
-        android:id="@+id/editPasswordDangNhap"
-        android:hint="Password"
-        android:textSize="22sp"
-        android:layout_marginTop="10dp"
+        <EditText
+            android:id="@+id/editEmailDangNhap"
+            android:hint="Email"
+            android:maxLines="1"
+            android:textStyle="bold"
+            android:inputType="text"
+            android:textSize="22sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/editPasswordLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/ic_lock"
-        app:layout_constraintTop_toBottomOf="@+id/editEmailDangNhap"/>
+        app:startIconDrawable="@drawable/ic_lock"
+        app:passwordToggleEnabled="true"
+        app:layout_constraintTop_toBottomOf="@+id/editEmailLayout">
+
+        <EditText
+            android:id="@+id/editPasswordDangNhap"
+            android:hint="Password"
+            android:maxLines="1"
+            android:textStyle="bold"
+            android:textSize="22sp"
+            android:inputType="textPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_lock" />
+    </com.google.android.material.textfield.TextInputLayout>
+
 
     <Button
         android:id="@+id/buttonLogin"
@@ -65,7 +86,7 @@
         android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editPasswordDangNhap"
+        app:layout_constraintTop_toBottomOf="@id/editPasswordLayout"
         tools:ignore="TextContrastCheck" />
 
     <TextView
@@ -90,29 +111,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/textSignUp"/>
-
-<!--    <ImageView-->
-<!--        android:src="@drawable/Capture"-->
-<!--        android:layout_width="100dp"-->
-<!--        android:layout_height="100dp"-->
-<!--        app:layout_constraintLeft_toLeftOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/buttonLogin"/>-->
-
-<!--    <Button-->
-<!--        android:id="@+id/btnChoose"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="Choose"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/buttonLogin"-->
-<!--        app:layout_constraintRight_toRightOf="parent"/>-->
-
-<!--    <Button-->
-<!--        android:id="@+id/btnAdd"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="Add"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/btnChoose"-->
-<!--        app:layout_constraintRight_toRightOf="parent"/>-->
 
     <TextView
         android:id="@+id/textSignUp"

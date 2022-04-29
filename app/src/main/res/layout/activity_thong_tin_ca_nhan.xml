@@ -46,7 +46,7 @@
 
         <ImageView
             android:id="@+id/imgAvatar"
-            android:src="@drawable/logo"
+            android:src="@drawable/avatardefault"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </androidx.cardview.widget.CardView>
@@ -54,8 +54,8 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/containerImagePhoto"
         android:layout_marginRight="15dp"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
         app:cardCornerRadius="25dp"
         app:layout_constraintRight_toLeftOf="@+id/containerImageEdit"
         app:layout_constraintBottom_toBottomOf="@+id/containerImageThongTinCaNhan">
@@ -73,8 +73,8 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/containerImageEdit"
         android:layout_marginRight="10dp"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
         app:cardCornerRadius="25dp"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="@+id/containerImageThongTinCaNhan">
@@ -93,8 +93,8 @@
         android:id="@+id/containerImageConfirm"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
         app:cardCornerRadius="25dp"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/containerImageEdit">
@@ -113,8 +113,8 @@
         android:id="@+id/containerImageCancel"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
         app:cardCornerRadius="25dp"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/containerImageConfirm">
@@ -152,6 +152,7 @@
             style="@style/Widget.Material3.TextInputEditText.FilledBox"
             android:text="Nhật Hào"
             android:textSize="20sp"
+            android:textStyle="bold"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </LinearLayout>
@@ -178,6 +179,7 @@
             android:textColor="@color/black"
             style="@style/Widget.Material3.TextInputEditText.FilledBox"
             android:text="Nam"
+            android:textStyle="bold"
             android:textSize="20sp"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
@@ -205,6 +207,7 @@
             style="@style/Widget.Material3.TextInputEditText.FilledBox"
             android:text="18/06/1999"
             android:textSize="20sp"
+            android:textStyle="bold"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -231,6 +234,7 @@
             android:textColor="@color/black"
             android:text="Đường số 21, Quận Gò Vấp, Tp.hcm"
             android:textSize="20sp"
+            android:textStyle="bold"
             style="@style/Widget.Material3.TextInputEditText.FilledBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />

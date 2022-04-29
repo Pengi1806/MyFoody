@@ -53,7 +53,7 @@ public class ThongTinCaNhanActivity extends AppCompatActivity {
     String Gender;
     String Phone;
     String Address;
-//    byte[] Avatar;
+    byte[] Avatar;
 
     Database database;
 
@@ -72,10 +72,8 @@ public class ThongTinCaNhanActivity extends AppCompatActivity {
             Gender = dataUser.getString(3);
             Phone = dataUser.getString(5);
             Address = dataUser.getString(4);
-//          Avatar = dataUser.getBlob(6);
+            Avatar = dataUser.getBlob(6);
         }
-        // Xử lý Avatar
-//        Bitmap bitmap = BitmapFactory.decodeByteArray(Avatar, 0, Avatar.length);
 
         //Ánh xạ
         editTextName = (EditText) findViewById(R.id.editTextFullName) ;
@@ -100,7 +98,12 @@ public class ThongTinCaNhanActivity extends AppCompatActivity {
         editTextGender.setText(Gender);
         editTextPhone.setText(Phone);
         editTextAddress.setText(Address);
-//        imgAvatar.setImageBitmap(bitmap);
+
+        // Xử lý Avatar
+        if (Avatar != null){
+            Bitmap bitmap = BitmapFactory.decodeByteArray(Avatar, 0, Avatar.length);
+            imgAvatar.setImageBitmap(bitmap);
+        }
 
         imgConfirm.setEnabled(false);
         imgCancel.setEnabled(false);
@@ -199,7 +202,6 @@ public class ThongTinCaNhanActivity extends AppCompatActivity {
             }
             return;
         }
-
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
@@ -216,10 +218,10 @@ public class ThongTinCaNhanActivity extends AppCompatActivity {
                 Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
                 imgAvatar.setImageBitmap(bitmap);
 
-//                database.updatePhotoUser(
-//                        imageViewToByte(imgAvatar),
-//                        Email
-//                );
+                database.updatePhotoUser(
+                        imageViewToByte(imgAvatar),
+                        Email
+                );
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }

@@ -26,9 +26,9 @@
             <EditText
                 android:layout_weight="8"
                 android:hint="Bún bò, Võ Văn Ngân"
+                android:maxLines="1"
                 android:textStyle="bold"
                 android:textColor="@color/black"
-                android:textColorHint="#DCDCDC"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:focusable="false"

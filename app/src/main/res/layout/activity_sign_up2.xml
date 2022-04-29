@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="Security Question"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgBackSignUp2"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:textSize="34sp"
@@ -33,8 +33,7 @@
 
     <Spinner
         android:id="@+id/spinnerSignUpSecurityQuestions"
-
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="70dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:drawable/btn_dropdown"
@@ -43,20 +42,28 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TextSignUpSecurityQuestion"/>
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/editSecurityAnswerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        app:startIconDrawable="@drawable/ic_baseline_info_24"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerSignUpSecurityQuestions">
     <EditText
         android:id="@+id/editSecurityAnswer"
+        android:maxLines="1"
+        android:inputType="text"
         android:textSize="24sp"
-        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Your answer"
-        android:drawableLeft="@drawable/ic_baseline_info_24"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerSignUpSecurityQuestions"/>
+        android:drawableLeft="@drawable/ic_baseline_info_24"/>
+    </com.google.android.material.textfield.TextInputLayout>
     <Button
         android:id="@+id/btnCreateAccount"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="40dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#70ad47"
@@ -66,7 +73,7 @@
         android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editSecurityAnswer"/>
+        app:layout_constraintTop_toBottomOf="@+id/editSecurityAnswerLayout"/>
 
     <TextView
         android:id="@+id/textAHAC"

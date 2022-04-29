@@ -32,66 +32,103 @@
         android:textColor="@color/black"
 
         />
-
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/editNameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:startIconDrawable="@drawable/ic_fullname"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TextCreateAccount">
     <EditText
+        android:maxLines="1"
+        android:inputType="text"
         android:id="@+id/editName"
         android:textSize="24sp"
-        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Name"
-        android:drawableLeft="@drawable/ic_fullname"
+        />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/editPhoneLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:startIconDrawable="@drawable/ic_baseline_phone"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TextCreateAccount"/>
-
+        app:layout_constraintTop_toBottomOf="@+id/editNameLayout">
     <EditText
+        android:maxLines="1"
+        android:inputType="text"
         android:id="@+id/editPhone"
         android:textSize="24sp"
-        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Phone"
-        android:drawableLeft="@drawable/ic_baseline_phone"
+        android:hint="Phone" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/editEmailLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:startIconDrawable="@drawable/ic_email"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editName"/>
-
+        app:layout_constraintTop_toBottomOf="@+id/editPhoneLayout">
     <EditText
+        android:maxLines="1"
+        android:inputType="text"
         android:id="@+id/editEmail"
         android:textSize="24sp"
-        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Email"
-        android:drawableLeft="@drawable/ic_email"
+        android:hint="Email"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/editPasswordLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:startIconDrawable="@drawable/ic_lock"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editPhone"/>
-
+        app:layout_constraintTop_toBottomOf="@+id/editEmailLayout"
+        app:passwordToggleEnabled="true">
     <EditText
+        android:maxLines="1"
+        android:inputType="textPassword"
         android:id="@+id/editPassword"
         android:textSize="24sp"
-        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Password"
-        android:drawableLeft="@drawable/ic_lock"
+        android:hint="Password"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/editConfirmPasswordLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:startIconDrawable="@drawable/ic_lock"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editEmail"/>
-
+        app:layout_constraintTop_toBottomOf="@+id/editPasswordLayout"
+        app:passwordToggleEnabled="true">
     <EditText
+        android:maxLines="1"
+        android:inputType="textPassword"
         android:id="@+id/editConfirmPassword"
         android:textSize="24sp"
-        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Confirm Password"
-        android:drawableLeft="@drawable/ic_lock"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editPassword"/>
+        android:hint="Confirm Password"/>
+</com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/btnNext"
@@ -105,7 +142,7 @@
         android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editConfirmPassword"/>
+        app:layout_constraintTop_toBottomOf="@+id/editConfirmPasswordLayout"/>
 
     <TextView
         android:id="@+id/textAHAC"

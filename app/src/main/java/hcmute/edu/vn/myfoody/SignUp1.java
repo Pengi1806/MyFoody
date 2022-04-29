@@ -48,21 +48,26 @@ public class SignUp1 extends AppCompatActivity {
                 String ConfirmPassword = edtConfirmPassword.getText().toString();
                 if(Name.equals("") == false && Email.equals("") == false && Password.equals("") == false
                         && ConfirmPassword.equals("") == false && Phone.equals("") == false) {
-                    if(Password.equals(ConfirmPassword) == true) {
-                        Cursor dataUsers = MainActivity.database.GetData("SELECT * FROM Users WHERE Email = '" + Email + "'");
-                        if(dataUsers.getCount() == 0) {
-                            Intent intent = new Intent(SignUp1.this, SignUp2.class);
-                            intent.putExtra("Name", Name);
-                            intent.putExtra("Email", Email);
-                            intent.putExtra("Password", Password);
-                            intent.putExtra("Phone", Phone);
-                            startActivity(intent);
+                    Cursor dataUsers = MainActivity.database.GetData("SELECT * FROM Users WHERE Email = '" + Email + "'");
+                    if(dataUsers.getCount() == 0) {
+                        if(Password.length()>=8) {
+                            if (Password.equals(ConfirmPassword)){
+                                Intent intent = new Intent(SignUp1.this, SignUp2.class);
+                                intent.putExtra("Name", Name);
+                                intent.putExtra("Email", Email);
+                                intent.putExtra("Password", Password);
+                                intent.putExtra("Phone", Phone);
+                                startActivity(intent);
+                            }
+                            else{
+                                Toast.makeText(SignUp1.this, "Mật khẩu xác nhận không trùng khớp", Toast.LENGTH_SHORT).show();
+                            }
                         } else {
-                            Toast.makeText(SignUp1.this, "Email đã tồn tại", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignUp1.this, "Mật khẩu tối thiểu 8 kí tự", Toast.LENGTH_SHORT).show();
                         }
                     }
                     else {
-                        Toast.makeText(SignUp1.this, "Mật khẩu xác nhận không trùng khớp", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SignUp1.this, "Email đã tồn tại", Toast.LENGTH_SHORT).show();
                     }
                 } else {
                     Toast.makeText(SignUp1.this, "Cần nhập đủ thông tin", Toast.LENGTH_SHORT).show();

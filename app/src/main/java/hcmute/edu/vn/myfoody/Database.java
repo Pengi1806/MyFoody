@@ -42,6 +42,20 @@ public class Database extends SQLiteOpenHelper {
         statement.executeInsert();
     }
 
+    public void insertFood(String foodName, byte[] image, Float price, Integer storeId){
+        SQLiteDatabase database = getWritableDatabase();
+        String sql = "INSERT INTO Foods VALUES(null, ?, ?, ?, ?)";
+        SQLiteStatement statement = database.compileStatement(sql);
+        statement.clearBindings();
+
+        statement.bindString(1, foodName);
+        statement.bindBlob(2, image);
+        statement.bindDouble(3, price);
+        statement.bindLong(4, storeId);
+
+        statement.executeInsert();
+    }
+
     
     public void updatePhotoUser(byte[] image, String Email) {
         SQLiteDatabase database = getWritableDatabase();
@@ -53,7 +67,24 @@ public class Database extends SQLiteOpenHelper {
         statement.bindBlob(1, image);
         statement.bindString(2, Email);
 
-        statement.executeUpdateDelete();
+        statement.execute();
+        database.close();
+    }
+
+    public void updateFood(String foodName, byte[] image, Float price, Integer foodId) {
+        SQLiteDatabase database = getWritableDatabase();
+        String sql = "UPDATE Foods SET FoodName = ?, Photo = ?, Price = ? WHERE FoodId = ?";
+
+        SQLiteStatement statement = database.compileStatement(sql);
+        statement.clearBindings();
+
+        statement.bindString(1, foodName);
+        statement.bindBlob(2, image);
+        statement.bindDouble(3, price);
+        statement.bindLong(4, foodId);
+
+        statement.execute();
+        database.close();
     }
 
     @Override

@@ -55,8 +55,6 @@ public class ThongTinCaNhanActivity extends AppCompatActivity {
     String Address;
     byte[] Avatar;
 
-    Database database;
-
     final int REQUEST_CODE_GALLERY = 999;
 
     @Override
@@ -65,8 +63,8 @@ public class ThongTinCaNhanActivity extends AppCompatActivity {
         setContentView(R.layout.activity_thong_tin_ca_nhan);
 
         Email = getIntent().getStringExtra("Email");
-        database = new Database(ThongTinCaNhanActivity.this, "foody.sqlite", null, 1);
-        Cursor dataUser = database.GetData("SELECT * FROM Users WHERE Email = '" + Email + "'");
+
+        Cursor dataUser = MainActivity.database.GetData("SELECT * FROM Users WHERE Email = '" + Email + "'");
         while (dataUser.moveToNext()){
             Name = dataUser.getString(2);
             Gender = dataUser.getString(3);
@@ -153,7 +151,7 @@ public class ThongTinCaNhanActivity extends AppCompatActivity {
                 Phone = editTextPhone.getText().toString().trim();
                 Address = editTextAddress.getText().toString().trim();
 
-                database.QueryData("UPDATE Users SET Name = '" + Name + "', Sex = '" + Gender + "', Address = '" + Address + "', Phone = '" + Phone + "' WHERE Email = '" + Email + "'");
+                MainActivity.database.QueryData("UPDATE Users SET Name = '" + Name + "', Sex = '" + Gender + "', Address = '" + Address + "', Phone = '" + Phone + "' WHERE Email = '" + Email + "'");
             }
         });
 
@@ -218,8 +216,8 @@ public class ThongTinCaNhanActivity extends AppCompatActivity {
                 Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
                 imgAvatar.setImageBitmap(bitmap);
 
-                database.updatePhotoUser(
-                        imageViewToByte(imgAvatar),
+                MainActivity.database.updatePhotoUser(
+                        MainActivity.database.imageViewToByte(imgAvatar),
                         Email
                 );
             } catch (FileNotFoundException e) {
@@ -227,13 +225,5 @@ public class ThongTinCaNhanActivity extends AppCompatActivity {
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
-    }
-
-    private byte[] imageViewToByte(ImageView image) {
-        Bitmap bitmap = ((BitmapDrawable)image.getDrawable()).getBitmap();
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-        byte[] byteArray = stream.toByteArray();
-        return byteArray;
     }
 }

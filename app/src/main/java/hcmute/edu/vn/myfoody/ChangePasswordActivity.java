@@ -24,16 +24,14 @@ public class ChangePasswordActivity extends AppCompatActivity {
     String Email;
     String OldPassword;
 
-    Database database;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_password);
 
         Email = getIntent().getStringExtra("Email");
-        database = new Database(ChangePasswordActivity.this, "foody.sqlite", null, 1);
-        Cursor dataUser = database.GetData("SELECT * FROM Users WHERE Email = '" + Email + "'");
+
+        Cursor dataUser = MainActivity.database.GetData("SELECT * FROM Users WHERE Email = '" + Email + "'");
         while (dataUser.moveToNext()){
             OldPassword = dataUser.getString(1);
         }
@@ -60,7 +58,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
                 if (OldPasswordView.equals("") == false && newPassword.equals("") == false && confirmPassword.equals("") == false) {
                     if (OldPasswordView.equals(OldPassword)) {
                         if (newPassword.equals(confirmPassword)) {
-                            database.QueryData("UPDATE Users SET Password = '" + newPassword + "' WHERE Email = '" + Email + "'");
+                            MainActivity.database.QueryData("UPDATE Users SET Password = '" + newPassword + "' WHERE Email = '" + Email + "'");
 
                             //Hiện thông báo
                             AlertDialog.Builder builder = new AlertDialog.Builder(ChangePasswordActivity.this);

@@ -22,8 +22,6 @@ public class ForgotPassword2 extends AppCompatActivity {
     EditText editTextConfirmPasswordForgotPassword;
     Button btnConfirmForgotPassword;
 
-    Database database;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,8 +31,6 @@ public class ForgotPassword2 extends AppCompatActivity {
         editTextNewPasswordForgotPassword = (EditText) findViewById(R.id.editNewPasswordForgotPassword);
         editTextConfirmPasswordForgotPassword = (EditText) findViewById(R.id.editConfirmPasswordForgotPassword);
         btnConfirmForgotPassword = (Button) findViewById(R.id.buttonConfirm);
-
-        database = new Database(ForgotPassword2.this, "foody.sqlite", null, 1);
 
         imgBackForgotPassword2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,12 +47,13 @@ public class ForgotPassword2 extends AppCompatActivity {
                 String confirmPassword = editTextConfirmPasswordForgotPassword.getText().toString();
                 if (newPassword.equals("") == false && confirmPassword.equals("") == false) {
                     if (newPassword.equals(confirmPassword)) {
-                        database.QueryData("UPDATE Users SET Password = '" + newPassword + "' WHERE Email = '" + Email + "'");
+                        MainActivity.database.QueryData("UPDATE Users SET Password = '" + newPassword + "' WHERE Email = '" + Email + "'");
 
                         //Hiện thông báo
                         AlertDialog.Builder builder = new AlertDialog.Builder(ForgotPassword2.this);
                         builder.setMessage("Mật khẩu của bạn đã được thay đổi");
                         builder.setTitle("THÔNG BÁO");
+
                         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
@@ -65,6 +62,7 @@ public class ForgotPassword2 extends AppCompatActivity {
                                 finish();
                             }
                         });
+
                         builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
                             @Override
                             public void onCancel(DialogInterface dialogInterface) {
@@ -73,6 +71,7 @@ public class ForgotPassword2 extends AppCompatActivity {
                                 finish();
                             }
                         });
+
                         AlertDialog dialog = builder.create();
                         dialog.show();
                     } else {

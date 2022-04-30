@@ -213,7 +213,5 @@ public class MainActivity extends AppCompatActivity {
 
         //delete data
 //        database.QueryData("DELETE FROM SecurityQuestions WHERE QuestionId > 4");
-
-
     }
 }

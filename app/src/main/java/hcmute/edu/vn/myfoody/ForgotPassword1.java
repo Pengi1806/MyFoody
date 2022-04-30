@@ -24,8 +24,6 @@ public class ForgotPassword1 extends AppCompatActivity {
     Button btnChangePassword;
     Spinner spinnerSecurityQuestions;
 
-    Database database;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,9 +37,9 @@ public class ForgotPassword1 extends AppCompatActivity {
 
         ArrayList<String> arraySecurityQuestions = new ArrayList<String>();
         arraySecurityQuestions.add("[Choose your security question]");
-        database = new Database(ForgotPassword1.this, "foody.sqlite", null, 1);
+
         //get data
-        Cursor dataSecurityQuestions = database.GetData("SELECT * FROM SecurityQuestions");
+        Cursor dataSecurityQuestions = MainActivity.database.GetData("SELECT * FROM SecurityQuestions");
         while (dataSecurityQuestions.moveToNext()){
             String QuestionContent = dataSecurityQuestions.getString(1);
             arraySecurityQuestions.add(QuestionContent);
@@ -68,11 +66,11 @@ public class ForgotPassword1 extends AppCompatActivity {
                 Integer QuestionIdSqlite = -2 ;
                 String UserAnswerSqlite = "";
                 if(Email.equals("") == false && SecurityQuestion.equals("[Choose your security question]") == false && SecurityAnswer.equals("") == false) {
-                    Cursor dataUsers = database.GetData("SELECT * FROM Users WHERE Email = '" + Email + "'");
+                    Cursor dataUsers = MainActivity.database.GetData("SELECT * FROM Users WHERE Email = '" + Email + "'");
                     if(dataUsers.getCount() == 0){
                         Toast.makeText(ForgotPassword1.this, "Email không tồn tại", Toast.LENGTH_SHORT).show();
                     } else {
-                        Cursor dataSecurityQuestions = database.GetData("SELECT * FROM SecurityQuestions WHERE QuestionContent = '" + SecurityQuestion + "'");
+                        Cursor dataSecurityQuestions = MainActivity.database.GetData("SELECT * FROM SecurityQuestions WHERE QuestionContent = '" + SecurityQuestion + "'");
                         while (dataSecurityQuestions.moveToNext()){
                             QuestionIdSqlite = dataSecurityQuestions.getInt(0);
                         }

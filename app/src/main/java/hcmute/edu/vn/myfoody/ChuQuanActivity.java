@@ -105,7 +105,9 @@ public class ChuQuanActivity extends AppCompatActivity {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 if(item.getItemId() == R.id.nav_ThongTinQuanAn){
-                    Toast.makeText(ChuQuanActivity.this, "Thông tin quán ăn", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(ChuQuanActivity.this, StoreInformationActivity.class);
+                    intent.putExtra("StoreId", StoreId);
+                    startActivity(intent);
                 }
                 else if(item.getItemId() == R.id.nav_Exit) {
                     finish();
@@ -139,7 +141,7 @@ public class ChuQuanActivity extends AppCompatActivity {
                             while (dataFood.moveToNext()) {
                                 arrId.add(dataFood.getInt(0));
                             }
-                            showDiaglogDelete(arrId.get(position));
+                            showDialogDelete(arrId.get(position));
                         }
                     }
                 });
@@ -154,7 +156,7 @@ public class ChuQuanActivity extends AppCompatActivity {
     Float FoodPriceDialog;
     byte[] PhotoDialog;
 
-    private void showDiaglogDelete(Integer foodId) {
+    private void showDialogDelete(Integer foodId) {
         AlertDialog.Builder dialogDelete = new AlertDialog.Builder(ChuQuanActivity.this);
 
         dialogDelete.setTitle("Warning!!");
@@ -294,9 +296,18 @@ public class ChuQuanActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
     }
 
+    private void updateAfterChangeInformation(){
+        Cursor dataStore = MainActivity.database.GetData("SELECT * FROM Stores WHERE Email = '" + Email + "'");
+        while (dataStore.moveToNext()){
+            StoreName = dataStore.getString(1);
+        }
+        textViewStoreName.setText(StoreName);
+    }
+
     @Override
     protected void onResume() {
         updateFoodList();
+        updateAfterChangeInformation();
         super.onResume();
     }
 }

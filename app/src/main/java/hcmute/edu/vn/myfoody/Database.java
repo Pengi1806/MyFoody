@@ -103,6 +103,90 @@ public class Database extends SQLiteOpenHelper {
         database.close();
     }
 
+    public void updateCoverPhotoStore(byte[] image, Integer storeId) {
+        SQLiteDatabase database = getWritableDatabase();
+        String sql = "UPDATE Stores SET CoverPhoto = ? WHERE StoreId = ?";
+
+        SQLiteStatement statement = database.compileStatement(sql);
+        statement.clearBindings();
+
+        statement.bindBlob(1, image);
+        statement.bindLong(2, storeId);
+
+        statement.execute();
+        database.close();
+    }
+
+    public void updateOpenTimeStore(String openTime, Integer storeId) {
+        SQLiteDatabase database = getWritableDatabase();
+        String sql = "UPDATE Stores SET OpenTime = ? WHERE StoreId = ?";
+
+        SQLiteStatement statement = database.compileStatement(sql);
+        statement.clearBindings();
+
+        statement.bindString(1, openTime);
+        statement.bindLong(2, storeId);
+
+        statement.execute();
+        database.close();
+    }
+
+    public void updateCloseTimeStore(String closeTime, Integer storeId) {
+        SQLiteDatabase database = getWritableDatabase();
+        String sql = "UPDATE Stores SET CloseTime = ? WHERE StoreId = ?";
+
+        SQLiteStatement statement = database.compileStatement(sql);
+        statement.clearBindings();
+
+        statement.bindString(1, closeTime);
+        statement.bindLong(2, storeId);
+
+        statement.execute();
+        database.close();
+    }
+
+    public void updateNameStore(String storeName, Integer storeId) {
+        SQLiteDatabase database = getWritableDatabase();
+        String sql = "UPDATE Stores SET StoreName = ? WHERE StoreId = ?";
+
+        SQLiteStatement statement = database.compileStatement(sql);
+        statement.clearBindings();
+
+        statement.bindString(1, storeName);
+        statement.bindLong(2, storeId);
+
+        statement.execute();
+        database.close();
+    }
+
+    public void updateAddressStore(String storeAddress, Integer storeId) {
+        SQLiteDatabase database = getWritableDatabase();
+        String sql = "UPDATE Stores SET Address = ? WHERE StoreId = ?";
+
+        SQLiteStatement statement = database.compileStatement(sql);
+        statement.clearBindings();
+
+        statement.bindString(1, storeAddress);
+        statement.bindLong(2, storeId);
+
+        statement.execute();
+        database.close();
+    }
+
+    public void updateCategoryStore(Integer storeCategoryId, Integer storeId) {
+        SQLiteDatabase database = getWritableDatabase();
+        String sql = "UPDATE Stores SET CategoryId = ? WHERE StoreId = ?";
+
+        SQLiteStatement statement = database.compileStatement(sql);
+        statement.clearBindings();
+
+        statement.bindLong(1, storeCategoryId);
+        statement.bindLong(2, storeId);
+
+        statement.execute();
+        database.close();
+    }
+
     public byte[] imageViewToByte(ImageView image) {
         Bitmap bitmap = ((BitmapDrawable)image.getDrawable()).getBitmap();
         ByteArrayOutputStream stream = new ByteArrayOutputStream();

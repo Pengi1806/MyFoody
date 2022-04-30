@@ -188,16 +188,16 @@ public class MainActivity extends AppCompatActivity {
 //        database.QueryData("INSERT INTO Categories VALUES(null, 'Beer club')");
 
         //insert Stores data
-//        database.QueryData("INSERT INTO Stores VALUES(null, 'Kobe Teppanyaki - Nhà Hàng Nhật', '13A Tú Xương, P. 7, Quận 3, TP. HCM', '10:00', '22:00', 1, null, null, '1@gmail.com')");
-//        database.QueryData("INSERT INTO Stores VALUES(null, 'Pizza Hut - Trương Định', '61 Trương Định, Quận 3, TP. HCM', '10:00', '22:00', 2, null, null, '2@gmail.com')");
-//        database.QueryData("INSERT INTO Stores VALUES(null, 'Bánh mì Chay Vĩnh Viễn', '203 Vĩnh Viễn, Quận 10, TP. HCM', '06:00', '21:00', 3, null, null, '3@gmail.com')");
-//        database.QueryData("INSERT INTO Stores VALUES(null, 'Five Boys - Sinh Tố Bùi Viện', '84/7 Bùi Viện, Quận 1, TP. HCM', '11:00', '23:59', 4, null, null, '4@gmail.com')");
-//        database.QueryData("INSERT INTO Stores VALUES(null, 'Lẩu Bò Tí Chuột 2', '21 Cống Quỳnh, Quận 1, TP. HCM', '09:00', '22:00', 5, null, null, '5@gmail.com')");
-//        database.QueryData("INSERT INTO Stores VALUES(null, 'Hangout Restaurant', '361A Phạm Ngũ Lão, Quận 1, TP. HCM', '10:00', '21:00', 6, null, null, '6@gmail.com')");
-//        database.QueryData("INSERT INTO Stores VALUES(null, 'Súp Cua Thảo - Hồ Thị Kỷ', '68/8 Hồ Thị Kỷ, Quận 10, TP. HCM', '13:00', '22:00', 7, null, null, '7@gmail.com')");
-//        database.QueryData("INSERT INTO Stores VALUES(null, 'Phúc Long 122 Lê Lợi', '122 Lê Lợi, Quận 1, TP. HCM', '8:00', '20:00', 8, null, null, '8@gmail.com')");
-//        database.QueryData("INSERT INTO Stores VALUES(null, 'Lush Saigon Bar', '2 Lý Tự Trọng, Quận 1, TP. HCM', '17:00', '23:59', 9, null, null, '9@gmail.com')");
-//        database.QueryData("INSERT INTO Stores VALUES(null, 'Fox Beer Club - Hàm Nghi', '11 Hàm Nghi, Quận 1, TP. HCM', '17:00', '23:59', 10, null, null, '10@gmail.com')");
+//        database.QueryData("INSERT INTO Stores VALUES(null, 'Kobe Teppanyaki - Nhà Hàng Nhật', '13A Tú Xương, P. 7, Quận 3, TP. HCM', '10:00', '22:00', 1, null, 0, '1@gmail.com')");
+//        database.QueryData("INSERT INTO Stores VALUES(null, 'Pizza Hut - Trương Định', '61 Trương Định, Quận 3, TP. HCM', '10:00', '22:00', 2, null, 0, '2@gmail.com')");
+//        database.QueryData("INSERT INTO Stores VALUES(null, 'Bánh mì Chay Vĩnh Viễn', '203 Vĩnh Viễn, Quận 10, TP. HCM', '06:00', '21:00', 3, null, 0, '3@gmail.com')");
+//        database.QueryData("INSERT INTO Stores VALUES(null, 'Five Boys - Sinh Tố Bùi Viện', '84/7 Bùi Viện, Quận 1, TP. HCM', '11:00', '23:59', 4, null, 0, '4@gmail.com')");
+//        database.QueryData("INSERT INTO Stores VALUES(null, 'Lẩu Bò Tí Chuột 2', '21 Cống Quỳnh, Quận 1, TP. HCM', '09:00', '22:00', 5, null, 0, '5@gmail.com')");
+//        database.QueryData("INSERT INTO Stores VALUES(null, 'Hangout Restaurant', '361A Phạm Ngũ Lão, Quận 1, TP. HCM', '10:00', '21:00', 6, null, 0, '6@gmail.com')");
+//        database.QueryData("INSERT INTO Stores VALUES(null, 'Súp Cua Thảo - Hồ Thị Kỷ', '68/8 Hồ Thị Kỷ, Quận 10, TP. HCM', '13:00', '22:00', 7, null, 0, '7@gmail.com')");
+//        database.QueryData("INSERT INTO Stores VALUES(null, 'Phúc Long 122 Lê Lợi', '122 Lê Lợi, Quận 1, TP. HCM', '8:00', '20:00', 8, null, 0, '8@gmail.com')");
+//        database.QueryData("INSERT INTO Stores VALUES(null, 'Lush Saigon Bar', '2 Lý Tự Trọng, Quận 1, TP. HCM', '17:00', '23:59', 9, null, 0, '9@gmail.com')");
+//        database.QueryData("INSERT INTO Stores VALUES(null, 'Fox Beer Club - Hàm Nghi', '11 Hàm Nghi, Quận 1, TP. HCM', '17:00', '23:59', 10, null, 0, '10@gmail.com')");
 
         //insert Users data
 //        database.QueryData("INSERT INTO Users VALUES('1@gmail.com', '1', '1', null, null, null, null, 1, 'An Hội', 2)");
@@ -213,5 +213,6 @@ public class MainActivity extends AppCompatActivity {
 
         //delete data
 //        database.QueryData("DELETE FROM SecurityQuestions WHERE QuestionId > 4");
+
     }
 }

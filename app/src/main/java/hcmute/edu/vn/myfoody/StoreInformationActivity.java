@@ -128,14 +128,15 @@ public class StoreInformationActivity extends AppCompatActivity {
             }
         });
 
-        imageViewStore.setOnClickListener(new View.OnClickListener() {
+        imageViewStore.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
-            public void onClick(View view) {
+            public boolean onLongClick(View view) {
                 ActivityCompat.requestPermissions(
                         StoreInformationActivity.this,
                         new String[] {Manifest.permission.READ_EXTERNAL_STORAGE},
                         REQUEST_CODE_GALLERY
                 );
+                return true;
             }
         });
 

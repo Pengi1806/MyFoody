@@ -37,16 +37,12 @@ public class AddFoodActivity extends AppCompatActivity {
 
     final int REQUEST_CODE_GALLERY = 999;
 
-    Database database;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_food);
 
         StoreId = getIntent().getIntExtra("StoreId", 0);
-
-        database = new Database(AddFoodActivity.this, "foody.sqlite", null, 1);
 
         imageViewFood = (ImageView) findViewById(R.id.imageViewFood);
         imageButtonBackAddFood = (ImageButton) findViewById(R.id.imgBackAddFood);
@@ -80,9 +76,9 @@ public class AddFoodActivity extends AppCompatActivity {
                 String foodPrice = editTextPrice.getText().toString().trim();
                 try {
                     if (foodName.equals("") == false && foodPrice.equals("") == false) {
-                        database.insertFood(
+                        MainActivity.database.insertFood(
                                 foodName,
-                                imageViewToByte(imageViewFood),
+                                MainActivity.database.imageViewToByte(imageViewFood),
                                 Float.valueOf(foodPrice),
                                 StoreId
                         );
@@ -131,13 +127,5 @@ public class AddFoodActivity extends AppCompatActivity {
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
-    }
-
-    private byte[] imageViewToByte(ImageView image) {
-        Bitmap bitmap = ((BitmapDrawable)image.getDrawable()).getBitmap();
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-        byte[] byteArray = stream.toByteArray();
-        return byteArray;
     }
 }

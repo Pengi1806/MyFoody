@@ -51,8 +51,6 @@ public class ChuQuanActivity extends AppCompatActivity {
     int StoreId;
     String StoreName;
 
-    Database database;
-
     final int REQUEST_CODE_GALLERY = 888;
 
     @Override
@@ -64,8 +62,7 @@ public class ChuQuanActivity extends AppCompatActivity {
 
         Email = getIntent().getStringExtra("Email");
 
-        database = new Database(ChuQuanActivity.this, "foody.sqlite", null, 1);
-        Cursor dataStore = database.GetData("SELECT * FROM Stores WHERE Email = '" + Email + "'");
+        Cursor dataStore = MainActivity.database.GetData("SELECT * FROM Stores WHERE Email = '" + Email + "'");
         while (dataStore.moveToNext()){
             StoreId = dataStore.getInt(0);
             StoreName = dataStore.getString(1);
@@ -83,7 +80,7 @@ public class ChuQuanActivity extends AppCompatActivity {
         gridViewFood.setAdapter(adapter);
 
 
-        Cursor dataFood = database.GetData("SELECT * FROM Foods WHERE StoreId = " + StoreId);
+        Cursor dataFood = MainActivity.database.GetData("SELECT * FROM Foods WHERE StoreId = " + StoreId);
         foodArrayList.clear();
         while (dataFood.moveToNext()){
             Integer FoodId = dataFood.getInt(0);
@@ -129,7 +126,7 @@ public class ChuQuanActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         if (i == 0) {
                             //Update Food
-                            Cursor dataFood = database.GetData("SELECT FoodId FROM Foods WHERE StoreId = " + StoreId);
+                            Cursor dataFood = MainActivity.database.GetData("SELECT FoodId FROM Foods WHERE StoreId = " + StoreId);
                             ArrayList<Integer> arrId = new ArrayList<Integer>();
                             while (dataFood.moveToNext()) {
                                 arrId.add(dataFood.getInt(0));
@@ -137,7 +134,7 @@ public class ChuQuanActivity extends AppCompatActivity {
                             showDialogUpdate(ChuQuanActivity.this, arrId.get(position));
                         } else {
                             //Delete Food
-                            Cursor dataFood = database.GetData("SELECT FoodId FROM Foods WHERE StoreId = " + StoreId);
+                            Cursor dataFood = MainActivity.database.GetData("SELECT FoodId FROM Foods WHERE StoreId = " + StoreId);
                             ArrayList<Integer> arrId = new ArrayList<Integer>();
                             while (dataFood.moveToNext()) {
                                 arrId.add(dataFood.getInt(0));
@@ -167,7 +164,7 @@ public class ChuQuanActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 try {
-                    database.deleteFood(foodId);
+                    MainActivity.database.deleteFood(foodId);
                     dialogInterface.dismiss();
                     Toast.makeText(ChuQuanActivity.this, "Delete successfully!!!", Toast.LENGTH_SHORT).show();
                 } catch (Exception error) {
@@ -197,7 +194,7 @@ public class ChuQuanActivity extends AppCompatActivity {
         EditText editTextPrice = (EditText) dialog.findViewById(R.id.editTextPriceUpdate);
         Button buttonUpdate = (Button) dialog.findViewById(R.id.buttonUpdateFood);
 
-        Cursor dataFood = database.GetData("SELECT * FROM Foods WHERE FoodId = " + foodId);
+        Cursor dataFood = MainActivity.database.GetData("SELECT * FROM Foods WHERE FoodId = " + foodId);
         while (dataFood.moveToNext()){
             FoodNameDialog = dataFood.getString(1);
             PhotoDialog = dataFood.getBlob(2);
@@ -234,9 +231,9 @@ public class ChuQuanActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 try {
-                    database.updateFood(
+                    MainActivity.database.updateFood(
                             editTextName.getText().toString().trim(),
-                            imageViewToByte(imageViewFood),
+                            MainActivity.database.imageViewToByte(imageViewFood),
                             Float.valueOf(editTextPrice.getText().toString().trim()),
                             foodId
                     );
@@ -283,16 +280,8 @@ public class ChuQuanActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    private byte[] imageViewToByte(ImageView image) {
-        Bitmap bitmap = ((BitmapDrawable)image.getDrawable()).getBitmap();
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-        byte[] byteArray = stream.toByteArray();
-        return byteArray;
-    }
-
     private void updateFoodList(){
-        Cursor dataFood = database.GetData("SELECT * FROM Foods WHERE StoreId = " + StoreId);
+        Cursor dataFood = MainActivity.database.GetData("SELECT * FROM Foods WHERE StoreId = " + StoreId);
         foodArrayList.clear();
         while (dataFood.moveToNext()){
             Integer FoodId = dataFood.getInt(0);

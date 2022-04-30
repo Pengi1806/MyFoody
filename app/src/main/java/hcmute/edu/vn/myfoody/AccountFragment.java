@@ -31,8 +31,6 @@ public class AccountFragment extends Fragment {
 
     ImageView imgAvatar;
 
-    Database database;
-
     String Email;
     String Name;
     int Role;
@@ -46,8 +44,7 @@ public class AccountFragment extends Fragment {
 
         Email = getArguments().getString("Email");
 
-        database = new Database(getActivity(), "foody.sqlite", null, 1);
-        Cursor dataUser = database.GetData("SELECT * FROM Users WHERE Email = '" + Email + "'");
+        Cursor dataUser = MainActivity.database.GetData("SELECT * FROM Users WHERE Email = '" + Email + "'");
         while (dataUser.moveToNext()){
             Name = dataUser.getString(2);
             Avatar = dataUser.getBlob(6);
@@ -127,7 +124,7 @@ public class AccountFragment extends Fragment {
 
     @Override
     public void onResume() {
-        Cursor dataUser = database.GetData("SELECT * FROM Users WHERE Email = '" + Email + "'");
+        Cursor dataUser = MainActivity.database.GetData("SELECT * FROM Users WHERE Email = '" + Email + "'");
         while (dataUser.moveToNext()){
             Name = dataUser.getString(2);
             Avatar = dataUser.getBlob(6);

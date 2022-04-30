@@ -57,29 +57,33 @@ public class ChangePasswordActivity extends AppCompatActivity {
                 String confirmPassword = editTextConfirmPasswordChangePassword.getText().toString();
                 if (OldPasswordView.equals("") == false && newPassword.equals("") == false && confirmPassword.equals("") == false) {
                     if (OldPasswordView.equals(OldPassword)) {
-                        if (newPassword.equals(confirmPassword)) {
-                            MainActivity.database.QueryData("UPDATE Users SET Password = '" + newPassword + "' WHERE Email = '" + Email + "'");
+                        if(newPassword.length() >= 8) {
+                            if (newPassword.equals(confirmPassword)) {
+                                MainActivity.database.QueryData("UPDATE Users SET Password = '" + newPassword + "' WHERE Email = '" + Email + "'");
 
-                            //Hiện thông báo
-                            AlertDialog.Builder builder = new AlertDialog.Builder(ChangePasswordActivity.this);
-                            builder.setMessage("Mật khẩu của bạn đã được thay đổi");
-                            builder.setTitle("THÔNG BÁO");
-                            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    finish();
-                                }
-                            });
-                            builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
-                                @Override
-                                public void onCancel(DialogInterface dialogInterface) {
-                                    finish();
-                                }
-                            });
-                            AlertDialog dialog = builder.create();
-                            dialog.show();
+                                //Hiện thông báo
+                                AlertDialog.Builder builder = new AlertDialog.Builder(ChangePasswordActivity.this);
+                                builder.setMessage("Mật khẩu của bạn đã được thay đổi");
+                                builder.setTitle("THÔNG BÁO");
+                                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        finish();
+                                    }
+                                });
+                                builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                                    @Override
+                                    public void onCancel(DialogInterface dialogInterface) {
+                                        finish();
+                                    }
+                                });
+                                AlertDialog dialog = builder.create();
+                                dialog.show();
+                            } else {
+                                Toast.makeText(ChangePasswordActivity.this, "Cần nhập mật khẩu giống nhau!!!", Toast.LENGTH_SHORT).show();
+                            }
                         } else {
-                            Toast.makeText(ChangePasswordActivity.this, "Cần nhập mật khẩu giống nhau!!!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ChangePasswordActivity.this, "Mật khẩu tối thiểu 8 kí tự", Toast.LENGTH_SHORT).show();
                         }
                     } else {
                         Toast.makeText(ChangePasswordActivity.this, "Mật khẩu hiện tại không đúng", Toast.LENGTH_SHORT).show();

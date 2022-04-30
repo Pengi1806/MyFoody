@@ -46,36 +46,40 @@ public class ForgotPassword2 extends AppCompatActivity {
                 String newPassword = editTextNewPasswordForgotPassword.getText().toString();
                 String confirmPassword = editTextConfirmPasswordForgotPassword.getText().toString();
                 if (newPassword.equals("") == false && confirmPassword.equals("") == false) {
-                    if (newPassword.equals(confirmPassword)) {
-                        MainActivity.database.QueryData("UPDATE Users SET Password = '" + newPassword + "' WHERE Email = '" + Email + "'");
+                    if(newPassword.length() >= 8) {
+                        if (newPassword.equals(confirmPassword)) {
+                            MainActivity.database.QueryData("UPDATE Users SET Password = '" + newPassword + "' WHERE Email = '" + Email + "'");
 
-                        //Hiện thông báo
-                        AlertDialog.Builder builder = new AlertDialog.Builder(ForgotPassword2.this);
-                        builder.setMessage("Mật khẩu của bạn đã được thay đổi");
-                        builder.setTitle("THÔNG BÁO");
+                            //Hiện thông báo
+                            AlertDialog.Builder builder = new AlertDialog.Builder(ForgotPassword2.this);
+                            builder.setMessage("Mật khẩu của bạn đã được thay đổi");
+                            builder.setTitle("THÔNG BÁO");
 
-                        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                Intent intent = new Intent(ForgotPassword2.this, MainActivity.class);
-                                startActivity(intent);
-                                finish();
-                            }
-                        });
+                            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    Intent intent = new Intent(ForgotPassword2.this, MainActivity.class);
+                                    startActivity(intent);
+                                    finish();
+                                }
+                            });
 
-                        builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
-                            @Override
-                            public void onCancel(DialogInterface dialogInterface) {
-                                Intent intent = new Intent(ForgotPassword2.this, MainActivity.class);
-                                startActivity(intent);
-                                finish();
-                            }
-                        });
+                            builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                                @Override
+                                public void onCancel(DialogInterface dialogInterface) {
+                                    Intent intent = new Intent(ForgotPassword2.this, MainActivity.class);
+                                    startActivity(intent);
+                                    finish();
+                                }
+                            });
 
-                        AlertDialog dialog = builder.create();
-                        dialog.show();
+                            AlertDialog dialog = builder.create();
+                            dialog.show();
+                        } else {
+                            Toast.makeText(ForgotPassword2.this, "Cần nhập mật khẩu giống nhau!!!", Toast.LENGTH_SHORT).show();
+                        }
                     } else {
-                        Toast.makeText(ForgotPassword2.this, "Cần nhập mật khẩu giống nhau!!!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ForgotPassword2.this, "Mật khẩu tối thiểu 8 kí tự", Toast.LENGTH_SHORT).show();
                     }
                 } else {
                     Toast.makeText(ForgotPassword2.this, "Cần nhập đủ thông tin", Toast.LENGTH_SHORT).show();

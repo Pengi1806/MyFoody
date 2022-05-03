@@ -24,14 +24,14 @@
             android:layout_height="match_parent" />
 
         <TextView
-            android:gravity="center"
             android:id="@+id/textViewAddFood"
-            android:text="Thêm món ăn"
-            android:textStyle="bold"
-            android:textSize="32sp"
-            android:textColor="@color/white"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Thêm món ăn"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            android:textStyle="bold" />
     </RelativeLayout>
 
     <ImageView

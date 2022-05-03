@@ -171,7 +171,7 @@ public class HomeFragment extends Fragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 Intent intent = new Intent(getActivity(), StoreHomeActivity.class);
                 intent.putExtra("StoreId", storeArrayList.get(position).getStoreId());
-                intent.putExtra("Eamil", Email);
+                intent.putExtra("Email", Email);
                 startActivity(intent);
             }
         });

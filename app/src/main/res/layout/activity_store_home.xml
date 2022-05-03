@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:focusable="true"
     android:focusableInTouchMode="true"
     android:orientation="vertical"
@@ -46,13 +46,13 @@
         </RelativeLayout>
     </androidx.appcompat.widget.Toolbar>
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <ImageView
@@ -61,7 +61,7 @@
                 android:scaleType="fitXY"
                 android:layout_width="match_parent"
                 android:layout_height="200dp" />
-            
+
             <TextView
                 android:id="@+id/textViewStoreNameHome"
                 android:text="Tên quán"
@@ -107,6 +107,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
                         app:layout_constraintHorizontal_chainStyle="packed"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -118,6 +119,7 @@
                         android:textSize="20sp"
                         android:text="Votes"
                         android:layout_marginTop="5dp"
+                        android:layout_marginBottom="10dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:layout_constraintTop_toTopOf="parent"
@@ -125,16 +127,6 @@
                         app:layout_constraintLeft_toRightOf="@id/textViewNumVote"
                         app:layout_constraintRight_toRightOf="parent"/>
                 </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <TextView
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:text="View all votes"
-                    android:textSize="20sp"
-                    android:textColor="#0000FF"
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
             </LinearLayout>
 
             <LinearLayout
@@ -318,19 +310,12 @@
                     android:layout_height="wrap_content"/>
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+            <ListView
+                android:id="@+id/listViewComment"
                 android:layout_marginTop="10dp"
-                android:paddingVertical="15dp"
-                android:paddingHorizontal="10dp"
                 android:background="@color/white"
-                android:orientation="vertical">
-
-                <ListView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-            </LinearLayout>
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
         </LinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 </LinearLayout>

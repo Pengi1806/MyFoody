@@ -213,6 +213,20 @@ public class Database extends SQLiteOpenHelper {
         statement.executeInsert();
     }
 
+    public void updateRatingStar(Float rateStar, Integer storeId, String email){
+        SQLiteDatabase database = getWritableDatabase();
+        String sql = "UPDATE RatingStars SET RateStar = ? WHERE StoreId = ? AND Email = ?";
+        SQLiteStatement statement = database.compileStatement(sql);
+        statement.clearBindings();
+
+        statement.bindDouble(1, rateStar);
+        statement.bindLong(2, storeId);
+        statement.bindString(3, email);
+
+        statement.execute();
+        database.close();
+    }
+
     public byte[] imageViewToByte(ImageView image) {
         Bitmap bitmap = ((BitmapDrawable)image.getDrawable()).getBitmap();
         ByteArrayOutputStream stream = new ByteArrayOutputStream();

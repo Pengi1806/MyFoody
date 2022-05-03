@@ -2,13 +2,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <ImageView
         android:id="@+id/imageViewStoreGridView"
-        android:src="@mipmap/ic_launcher"
+        android:layout_width="170dp"
+        android:layout_height="100dp"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
-        android:layout_width="170dp"
-        android:layout_height="170dp"/>
+        android:scaleType="fitXY"
+        android:src="@mipmap/ic_launcher" />
 
     <TextView
         android:id="@+id/textViewStoreNameGridView"

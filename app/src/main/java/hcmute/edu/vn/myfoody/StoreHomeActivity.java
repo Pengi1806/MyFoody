@@ -13,14 +13,20 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class StoreHomeActivity extends AppCompatActivity {
 
@@ -31,6 +37,7 @@ public class StoreHomeActivity extends AppCompatActivity {
     ImageView imageViewStoreHome;
     TextView textViewStoreNameHome;
     RatingBar ratingBarStoreHome;
+    TextView textViewNumVote;
     TextView textViewOpeningClosedStoreHome;
     TextView textViewOpenTimeCloseTimeStoreHome;
     TextView textViewStoreAddressHome;
@@ -38,6 +45,10 @@ public class StoreHomeActivity extends AppCompatActivity {
     TextView textViewStorePriceHome;
     LinearLayout containerStoreMenuHome;
     LinearLayout containerViewAllInformationStoreHome;
+
+    ListView listViewComment;
+    ArrayList<Comment> commentArrayList;
+    CommentListAdapter adapter;
 
     Integer StoreId;
     String StoreName;
@@ -51,6 +62,7 @@ public class StoreHomeActivity extends AppCompatActivity {
     Float StoreFoodMinPrice;
     Float StoreFoodMaxPrice;
     String Email;
+    Integer numVote;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,12 +96,18 @@ public class StoreHomeActivity extends AppCompatActivity {
             StoreFoodMaxPrice = dataFoodMinMax.getFloat(1);
         }
 
+        Cursor dataNumVote = MainActivity.database.GetData("SELECT COUNT(*) FROM RatingStars WHERE StoreId = " + StoreId);
+        while (dataNumVote.moveToNext()){
+            numVote = dataNumVote.getInt(0);
+        }
+
         toolbarStoreHome = (Toolbar) findViewById(R.id.toolbarStoreHome);
         imgBackStoreHome = (ImageButton) findViewById(R.id.imageButtonBackStoreHome);
         textViewStoreHome = (TextView) findViewById(R.id.textViewStoreHome);
         imageViewStoreHome = (ImageView) findViewById(R.id.imageViewStoreHome) ;
         textViewStoreNameHome = (TextView) findViewById(R.id.textViewStoreNameHome);
         ratingBarStoreHome = (RatingBar) findViewById(R.id.ratingBarStoreHome);
+        textViewNumVote = (TextView) findViewById(R.id.textViewNumVote);
         textViewOpeningClosedStoreHome = (TextView) findViewById(R.id.textViewOpeningClosedStoreHome);
         textViewOpenTimeCloseTimeStoreHome = (TextView) findViewById(R.id.textViewOpenTimeCloseTimeStoreHome);
         textViewStoreAddressHome = (TextView) findViewById(R.id.textViewStoreAddressHome);
@@ -97,6 +115,7 @@ public class StoreHomeActivity extends AppCompatActivity {
         textViewStorePriceHome = (TextView) findViewById(R.id.textViewStorePriceHome);
         containerStoreMenuHome = (LinearLayout) findViewById(R.id.containerStoreMenuHome);
         containerViewAllInformationStoreHome = (LinearLayout) findViewById(R.id.containerViewAllInformationStoreHome);
+        listViewComment = (ListView) findViewById(R.id.listViewComment);
 
         textViewStoreHome.setText(StoreName);
 
@@ -108,10 +127,28 @@ public class StoreHomeActivity extends AppCompatActivity {
 
         textViewStoreNameHome.setText(StoreName);
         ratingBarStoreHome.setRating(StoreRateStar);
+        textViewNumVote.setText(numVote.toString());
         textViewOpenTimeCloseTimeStoreHome.setText(StoreOpenTime + " - " + StoreCloseTime);
         textViewStoreAddressHome.setText(StoreAddress);
         textViewStoreCategoryHome.setText(StoreCategoryName);
         textViewStorePriceHome.setText(StoreFoodMinPrice.toString() + " - " + StoreFoodMaxPrice.toString());
+
+        commentArrayList = new ArrayList<Comment>();
+        adapter = new CommentListAdapter(StoreHomeActivity.this, R.layout.row_comment, commentArrayList);
+        listViewComment.setAdapter(adapter);
+
+        Cursor dataComment = MainActivity.database.GetData("SELECT * FROM Comments WHERE StoreId = " + StoreId);
+        commentArrayList.clear();
+        while (dataComment.moveToNext()){
+            Integer CommentId = dataComment.getInt(0);
+            String CommentContent = dataComment.getString(1);
+            Integer StoreId = dataComment.getInt(2);
+            String Email = dataComment.getString(3);
+
+            commentArrayList.add(new Comment(CommentId, CommentContent, StoreId, Email));
+        }
+        adapter.notifyDataSetChanged();
+        setListViewHeightBasedOnChildren(listViewComment);
 
         toolbarStoreHome.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
@@ -182,18 +219,28 @@ public class StoreHomeActivity extends AppCompatActivity {
                 } catch (Exception error) {
                     Log.e("Update error", error.getMessage());
                 }
-//                updateFoodList();
+                updateCommentList();
             }
         });
     }
 
+    Float RateStar;
     private void showDialogRateStarStore(Activity activity, Integer storeId, String email) {
         Dialog dialog = new Dialog(activity);
         dialog.setContentView(R.layout.ratestar_dialog_store_home);
         dialog.setTitle("Rating Star");
 
+
         RatingBar ratingBarStoreHomeDialog = (RatingBar) dialog.findViewById(R.id.ratingBarStoreHomeDialog);
         Button buttonRateStoreDialog = (Button) dialog.findViewById(R.id.buttonRateStoreDialog);
+
+        Cursor dataRatingStar = MainActivity.database.GetData("SELECT * FROM RatingStars WHERE StoreId = " + storeId + " AND Email = '" + email + "'");
+        if(dataRatingStar.getCount() != 0) {
+            while (dataRatingStar.moveToNext()){
+                RateStar = dataRatingStar.getFloat(1);
+            }
+            ratingBarStoreHomeDialog.setRating(RateStar);
+        }
 
         //set width for dialog
         int width = (int) (activity.getResources().getDisplayMetrics().widthPixels * 0.95);
@@ -206,18 +253,87 @@ public class StoreHomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 try {
-                    MainActivity.database.insertRatingStar(
-                            ratingBarStoreHomeDialog.getRating(),
-                            storeId,
-                            email
-                    );
+                    Cursor dataRatingStar = MainActivity.database.GetData("SELECT * FROM RatingStars WHERE StoreId = " + storeId + " AND Email = '" + email + "'");
+                    if(dataRatingStar.getCount() == 0){
+                        MainActivity.database.insertRatingStar(
+                                ratingBarStoreHomeDialog.getRating(),
+                                storeId,
+                                email
+                        );
+                    } else {
+                        MainActivity.database.updateRatingStar(
+                                ratingBarStoreHomeDialog.getRating(),
+                                storeId,
+                                email
+                        );
+                    }
+                    Cursor avgRateStarStore = MainActivity.database.GetData("SELECT avg(RateStar) FROM RatingStars WHERE StoreId = " + storeId);
+                    while (avgRateStarStore.moveToNext()) {
+                        MainActivity.database.QueryData("UPDATE Stores SET StoreRateStar = " + avgRateStarStore.getFloat(0) + " WHERE StoreId = " + storeId);
+                    }
                     dialog.dismiss();
                     Toast.makeText(StoreHomeActivity.this, "You rated successfully!!!", Toast.LENGTH_SHORT).show();
                 } catch (Exception error) {
                     Log.e("Update error", error.getMessage());
                 }
-//                updateFoodList();
+                updateRateStarStore();
             }
         });
+    }
+
+    public static void setListViewHeightBasedOnChildren(ListView listView) {
+        ListAdapter listAdapter = listView.getAdapter();
+        if (listAdapter == null) {
+            // pre-condition
+            return;
+        }
+
+        int totalHeight = 0;
+        int desiredWidth = View.MeasureSpec.makeMeasureSpec(listView.getWidth(), View.MeasureSpec.AT_MOST);
+        for (int i = 0; i < listAdapter.getCount(); i++) {
+            View listItem = listAdapter.getView(i, null, listView);
+            listItem.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);
+            totalHeight += listItem.getMeasuredHeight();
+        }
+
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+        listView.setLayoutParams(params);
+        listView.requestLayout();
+    }
+
+    private void updateCommentList(){
+        Cursor dataComment = MainActivity.database.GetData("SELECT * FROM Comments WHERE StoreId = " + StoreId);
+        commentArrayList.clear();
+        while (dataComment.moveToNext()){
+            Integer CommentId = dataComment.getInt(0);
+            String CommentContent = dataComment.getString(1);
+            Integer StoreId = dataComment.getInt(2);
+            String Email = dataComment.getString(3);
+
+            commentArrayList.add(new Comment(CommentId, CommentContent, StoreId, Email));
+        }
+        adapter.notifyDataSetChanged();
+        setListViewHeightBasedOnChildren(listViewComment);
+    }
+
+    private void updateRateStarStore(){
+        Cursor dataStore = MainActivity.database.GetData("SELECT * FROM Stores WHERE StoreId = " + StoreId);
+        while (dataStore.moveToNext()){
+            StoreName = dataStore.getString(1);
+            StoreAddress = dataStore.getString(2);
+            StoreOpenTime = dataStore.getString(3);
+            StoreCloseTime = dataStore.getString(4);
+            StoreCategoryId = dataStore.getInt(5);
+            StoreCoverPhoto = dataStore.getBlob(6);
+            StoreRateStar = dataStore.getFloat(7);
+        }
+        ratingBarStoreHome.setRating(StoreRateStar);
+
+        Cursor dataNumVote = MainActivity.database.GetData("SELECT COUNT(*) FROM RatingStars WHERE StoreId = " + StoreId);
+        while (dataNumVote.moveToNext()){
+            numVote = dataNumVote.getInt(0);
+        }
+        textViewNumVote.setText(numVote.toString());
     }
 }

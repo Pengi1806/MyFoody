@@ -65,9 +65,10 @@ public class FoodListAdapter extends BaseAdapter {
         holder.txtPrice.setText(food.getPrice().toString());
 
         byte[] foodImage = food.getImage();
-        Bitmap bitmap = BitmapFactory.decodeByteArray(foodImage, 0, foodImage.length);
-        holder.imageView.setImageBitmap(bitmap);
-
+        if(foodImage!=null){
+            Bitmap bitmap = BitmapFactory.decodeByteArray(foodImage, 0, foodImage.length);
+            holder.imageView.setImageBitmap(bitmap);
+        }
         return row;
     }
 }

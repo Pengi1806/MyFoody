@@ -63,6 +63,7 @@ public class StoreListAdapter extends BaseAdapter {
 
 
             byte[] storeImage = store.getCoverPhoto();
+
         if(storeImage!=null) {
             Bitmap bitmap = BitmapFactory.decodeByteArray(storeImage, 0, storeImage.length);
             holder.imageView.setImageBitmap(bitmap);

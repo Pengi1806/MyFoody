@@ -426,7 +426,7 @@ public class MainActivity extends AppCompatActivity {
 //        database.QueryData("INSERT INTO RatingStars VALUES(null, 4.5, 1, '99@gmail.com')");
 //        database.QueryData("INSERT INTO RatingStars VALUES(null, 4, 1, '98@gmail.com')");
 //        database.QueryData("INSERT INTO RatingStars VALUES(null, 3.5, 1, '97@gmail.com' )");
-//        database.QueryData("INSERT INTO RatingStars VALUES(null, 3, 1, '96@gmail.com')");
-        
+//        database.QueryData("INSERT INTO RatingStars VALUES(null, 3, 1, '96@gmail.com')");    
+
     }
 }

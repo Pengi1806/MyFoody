@@ -26,8 +26,6 @@ public class SignUp2 extends AppCompatActivity {
     TextView textViewSecurityQuestion;
     EditText editSecurityAnswer;
 
-    Database database;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,9 +46,8 @@ public class SignUp2 extends AppCompatActivity {
 
         ArrayList<String> arraySecurityQuestions = new ArrayList<String>();
         arraySecurityQuestions.add("[Choose your security question]");
-        database = new Database(SignUp2.this, "foody.sqlite", null, 1);
         //get data
-        Cursor dataSecurityQuestions = database.GetData("SELECT * FROM SecurityQuestions");
+        Cursor dataSecurityQuestions = MainActivity.database.GetData("SELECT * FROM SecurityQuestions");
         while (dataSecurityQuestions.moveToNext()){
             String QuestionContent = dataSecurityQuestions.getString(1);
             QuestionID = dataSecurityQuestions.getInt(0);

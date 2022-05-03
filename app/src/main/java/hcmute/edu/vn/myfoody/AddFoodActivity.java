@@ -34,6 +34,7 @@ public class AddFoodActivity extends AppCompatActivity {
     Button buttonThem;
 
     Integer StoreId;
+    Boolean Flag;
 
     final int REQUEST_CODE_GALLERY = 999;
 
@@ -43,6 +44,7 @@ public class AddFoodActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_food);
 
         StoreId = getIntent().getIntExtra("StoreId", 0);
+        Flag = false;
 
         imageViewFood = (ImageView) findViewById(R.id.imageViewFood);
         imageButtonBackAddFood = (ImageButton) findViewById(R.id.imgBackAddFood);
@@ -75,7 +77,7 @@ public class AddFoodActivity extends AppCompatActivity {
                 String foodName = editTextFoodName.getText().toString().trim();
                 String foodPrice = editTextPrice.getText().toString().trim();
                 try {
-                    if (foodName.equals("") == false && foodPrice.equals("") == false) {
+                    if (foodName.equals("") == false && foodPrice.equals("") == false && Flag == true) {
                         MainActivity.database.insertFood(
                                 foodName,
                                 MainActivity.database.imageViewToByte(imageViewFood),
@@ -122,6 +124,8 @@ public class AddFoodActivity extends AppCompatActivity {
 
                 Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
                 imageViewFood.setImageBitmap(bitmap);
+                //
+                Flag = true;
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }

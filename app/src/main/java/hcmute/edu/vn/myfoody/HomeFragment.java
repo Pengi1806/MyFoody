@@ -31,9 +31,6 @@ public class HomeFragment extends Fragment {
     ImageButton ImageButtonSearchHomeFragment;
     EditText EditTextSearchHomeFragment;
 
-
-    Database database;
-
     Integer CategoryIdFilter;
 
     String Email;
@@ -54,8 +51,6 @@ public class HomeFragment extends Fragment {
         ImageButtonSearchHomeFragment = (ImageButton) view.findViewById(R.id.ImageButtonSearchHomeFragment);
         EditTextSearchHomeFragment = (EditText) view.findViewById(R.id.EditTextSearchHomeFragment);
 
-        database = new Database(view.getContext(), "foody.sqlite", null, 1);
-
         ImageButtonSearchHomeFragment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -64,14 +59,14 @@ public class HomeFragment extends Fragment {
                 Cursor dataStoreFilterBySearchCategory;
                 if(SearchCategory == "All")
                 {
-                    dataStoreFilterBySearchCategory = database.GetData("SELECT * FROM Stores WHERE StoreName LIKE '%"+SearchInput+"%' " +
+                    dataStoreFilterBySearchCategory = MainActivity.database.GetData("SELECT * FROM Stores WHERE StoreName LIKE '%"+SearchInput+"%' " +
                             "OR Address LIKE '%"+SearchInput+"%'");
                 } else {
-                    Cursor dataSearchCategory = database.GetData("SELECT * FROM Categories WHERE CategoryName = '" + SearchCategory + "'");
+                    Cursor dataSearchCategory = MainActivity.database.GetData("SELECT * FROM Categories WHERE CategoryName = '" + SearchCategory + "'");
                     while (dataSearchCategory.moveToNext()){
                         CategoryIdFilter = dataSearchCategory.getInt(0);
                     }
-                    dataStoreFilterBySearchCategory = database.GetData("SELECT * FROM Stores WHERE (StoreName LIKE '%"+SearchInput+"%' " +
+                    dataStoreFilterBySearchCategory = MainActivity.database.GetData("SELECT * FROM Stores WHERE (StoreName LIKE '%"+SearchInput+"%' " +
                             "OR Address LIKE '%"+SearchInput+"%') AND CategoryId = " + CategoryIdFilter);
                 }
 
@@ -94,7 +89,7 @@ public class HomeFragment extends Fragment {
         });
 
 
-        Cursor dataStore = database.GetData("SELECT * FROM Stores");
+        Cursor dataStore = MainActivity.database.GetData("SELECT * FROM Stores");
         storeArrayList.clear();
         while (dataStore.moveToNext()){
             Integer StoreId = dataStore.getInt(0);
@@ -107,7 +102,8 @@ public class HomeFragment extends Fragment {
             Float StoreRateStar = dataStore.getFloat(7);
             String Email = dataStore.getString(8);
 
-            storeArrayList.add(new Store(StoreId, StoreName, Address, OpenTime, CloseTime, CategoryId, CoverPhoto, StoreRateStar, Email));
+            storeArrayList.add(new Store(StoreId, StoreName, Address, OpenTime,
+                    CloseTime, CategoryId, CoverPhoto, StoreRateStar, Email));
         }
         adapter.notifyDataSetChanged();
 
@@ -115,7 +111,7 @@ public class HomeFragment extends Fragment {
         arrayCategories.add("All");
 
 
-        Cursor dataCategories = database.GetData("SELECT * FROM Categories");
+        Cursor dataCategories = MainActivity.database.GetData("SELECT * FROM Categories");
         while (dataCategories.moveToNext()){
             String CategoryName = dataCategories.getString(1);
             arrayCategories.add(CategoryName);
@@ -132,14 +128,14 @@ public class HomeFragment extends Fragment {
                 Cursor dataStoreFilterByCategory;
                 if(Category == "All")
                 {
-                    dataStoreFilterByCategory = database.GetData("SELECT * FROM Stores");
+                    dataStoreFilterByCategory = MainActivity.database.GetData("SELECT * FROM Stores");
 
                 } else {
-                    Cursor dataSelectedCategory = database.GetData("SELECT * FROM Categories WHERE CategoryName = '" + Category + "'");
+                    Cursor dataSelectedCategory = MainActivity.database.GetData("SELECT * FROM Categories WHERE CategoryName = '" + Category + "'");
                     while (dataSelectedCategory.moveToNext()){
                         CategoryIdFilter = dataSelectedCategory.getInt(0);
                     }
-                    dataStoreFilterByCategory = database.GetData("SELECT * FROM Stores WHERE CategoryId = " + CategoryIdFilter);
+                    dataStoreFilterByCategory = MainActivity.database.GetData("SELECT * FROM Stores WHERE CategoryId = " + CategoryIdFilter);
                 }
 
                 storeArrayList.clear();

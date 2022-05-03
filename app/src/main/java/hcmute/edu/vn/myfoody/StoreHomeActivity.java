@@ -173,13 +173,19 @@ public class StoreHomeActivity extends AppCompatActivity {
         containerStoreMenuHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(StoreHomeActivity.this, MenuStoreHomeActivity.class);
+                intent.putExtra("StoreId", StoreId);
+                intent.putExtra("Email", Email);
+                startActivity(intent);
             }
         });
 
         containerViewAllInformationStoreHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(StoreHomeActivity.this, AllInformationStoreHome.class);
+                intent.putExtra("StoreId", StoreId);
+                startActivity(intent);
             }
         });
     }

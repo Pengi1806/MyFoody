@@ -5,8 +5,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/textViewUpdateStore"
-        android:text="Update"
+        android:text="Rating Star"
         android:layout_marginTop="10dp"
         android:textSize="24sp"
         android:textColor="@android:color/black"
@@ -15,20 +14,19 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"/>
 
-    <EditText
-        android:id="@+id/editTextUpdateStore"
-        android:maxLines="1"
-        android:inputType="text"
-        android:textSize="18sp"
-        android:textStyle="bold"
+    <RatingBar
+        android:id="@+id/ratingBarStoreHomeDialog"
         android:layout_marginTop="30dp"
-        android:layout_marginHorizontal="20dp"
-        android:layout_width="match_parent"
+        android:numStars="5"
+        android:stepSize="0.5"
+        android:progressTint="@android:color/holo_orange_dark"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
     <Button
-        android:id="@+id/buttonUpdateStore"
-        android:text="UPDATE"
+        android:id="@+id/buttonRateStoreDialog"
+        android:text="RATE"
         android:layout_marginTop="30dp"
         android:textSize="18sp"
         android:textStyle="bold"

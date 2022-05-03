@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyFoody">
         <activity
+            android:name=".StoreHomeActivity"
+            android:exported="false" />
+        <activity
             android:name=".StoreInformationActivity"
             android:exported="false" />
         <activity

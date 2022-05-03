@@ -255,8 +255,9 @@ public class StoreInformationActivity extends AppCompatActivity {
     private void showDialogUpdate(Activity activity, String type, Integer storeId ){
         Dialog dialog = new Dialog(activity);
         dialog.setContentView(R.layout.update_store);
-        dialog.setTitle("Update" + type);
+        dialog.setTitle("Update " + type);
 
+        TextView textViewUpdateStore = (TextView) dialog.findViewById(R.id.textViewUpdateStore);
         EditText editTextStoreUpdate = (EditText) dialog.findViewById(R.id.editTextUpdateStore);
         Button buttonStoreUpdate = (Button) dialog.findViewById(R.id.buttonUpdateStore);
 
@@ -268,13 +269,14 @@ public class StoreInformationActivity extends AppCompatActivity {
                 editTextDialog = dataStore.getString(2);
             }
         }
+        textViewUpdateStore.setText("Update " + type);
         editTextStoreUpdate.setHint(type);
         editTextStoreUpdate.setText(editTextDialog);
 
         //set width for dialog
         int width = (int) (activity.getResources().getDisplayMetrics().widthPixels * 0.95);
         //set height for dialog
-        int height = (int) (activity.getResources().getDisplayMetrics().heightPixels * 0.3);
+        int height = (int) (activity.getResources().getDisplayMetrics().heightPixels * 0.35);
 
         dialog.getWindow().setLayout(width, height);
         dialog.show();
@@ -308,7 +310,7 @@ public class StoreInformationActivity extends AppCompatActivity {
     private void showDialogUpdateCategory(Activity activity, Integer storeId, String storeCategoryName){
         Dialog dialog = new Dialog(activity);
         dialog.setContentView(R.layout.update_store_category);
-        dialog.setTitle("Update Category");
+        dialog.setTitle("Update Store's Category");
 
         Spinner spinnerCategories = (Spinner) dialog.findViewById(R.id.spinnerCategories);
         Button buttonUpdateStoreCategory = (Button) dialog.findViewById(R.id.buttonUpdateStoreCategory);
@@ -330,7 +332,7 @@ public class StoreInformationActivity extends AppCompatActivity {
         //set width for dialog
         int width = (int) (activity.getResources().getDisplayMetrics().widthPixels * 0.95);
         //set height for dialog
-        int height = (int) (activity.getResources().getDisplayMetrics().heightPixels * 0.32);
+        int height = (int) (activity.getResources().getDisplayMetrics().heightPixels * 0.37);
 
         dialog.getWindow().setLayout(width, height);
         dialog.show();

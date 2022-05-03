@@ -16,6 +16,7 @@ import com.google.android.material.navigation.NavigationBarView;
 public class HomeActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     HomeFragment homeFragment = new HomeFragment();
+    CartFragment cartFragment = new CartFragment();
     AccountFragment accountFragment = new AccountFragment();
     Bundle bundle = new Bundle();
 
@@ -29,6 +30,8 @@ public class HomeActivity extends AppCompatActivity {
         Email = getIntent().getStringExtra("Email");
 
         bundle.putString("Email", Email);
+        homeFragment.setArguments(bundle);
+        accountFragment.setArguments(bundle);
 
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
 
@@ -41,8 +44,10 @@ public class HomeActivity extends AppCompatActivity {
                     case R.id.home:
                         getSupportFragmentManager().beginTransaction().replace(R.id.container, homeFragment).commit();
                         return true;
+                    case R.id.cart:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.container, cartFragment).commit();
+                        return true;
                     case R.id.account:
-                        accountFragment.setArguments(bundle);
                         getSupportFragmentManager().beginTransaction().replace(R.id.container, accountFragment).commit();
                         return true;
                 }

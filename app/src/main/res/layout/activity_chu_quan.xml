@@ -41,6 +41,7 @@
                     android:layout_centerInParent="true"
                     android:text="Menu"
                     android:maxLines="1"
+                    android:inputType="text"
                     android:paddingLeft="50dp"
                     android:textStyle="bold"
                     android:textSize="18sp"

@@ -5,6 +5,7 @@
 
     <ImageView
         android:id="@+id/imageViewFoodGridView"
+        android:scaleType="fitXY"
         android:src="@mipmap/ic_launcher"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"

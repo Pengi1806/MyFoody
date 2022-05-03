@@ -1,5 +1,6 @@
 package hcmute.edu.vn.myfoody;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 
@@ -35,11 +36,15 @@ public class HomeFragment extends Fragment {
 
     Integer CategoryIdFilter;
 
+    String Email;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_home, container, false);
+
+        Email = getArguments().getString("Email");
 
         spinnerCategoriesHome = (Spinner) view.findViewById(R.id.dropdownCategoriesHome);
         gridViewStoresHome = (GridView) view.findViewById(R.id.gridViewStoreHome);
@@ -158,6 +163,16 @@ public class HomeFragment extends Fragment {
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 
+            }
+        });
+
+        gridViewStoresHome.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                Intent intent = new Intent(getActivity(), StoreHomeActivity.class);
+                intent.putExtra("StoreId", storeArrayList.get(position).getStoreId());
+                intent.putExtra("Eamil", Email);
+                startActivity(intent);
             }
         });
         return view;

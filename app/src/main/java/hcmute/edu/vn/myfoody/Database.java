@@ -187,6 +187,32 @@ public class Database extends SQLiteOpenHelper {
         database.close();
     }
 
+    public void insertReview(String review, Integer storeId, String email){
+        SQLiteDatabase database = getWritableDatabase();
+        String sql = "INSERT INTO Comments VALUES(null, ?, ?, ?)";
+        SQLiteStatement statement = database.compileStatement(sql);
+        statement.clearBindings();
+
+        statement.bindString(1, review);
+        statement.bindLong(2, storeId);
+        statement.bindString(3, email);
+
+        statement.executeInsert();
+    }
+
+    public void insertRatingStar(Float rateStar, Integer storeId, String email){
+        SQLiteDatabase database = getWritableDatabase();
+        String sql = "INSERT INTO RatingStars VALUES(null, ?, ?, ?)";
+        SQLiteStatement statement = database.compileStatement(sql);
+        statement.clearBindings();
+
+        statement.bindDouble(1, rateStar);
+        statement.bindLong(2, storeId);
+        statement.bindString(3, email);
+
+        statement.executeInsert();
+    }
+
     public byte[] imageViewToByte(ImageView image) {
         Bitmap bitmap = ((BitmapDrawable)image.getDrawable()).getBitmap();
         ByteArrayOutputStream stream = new ByteArrayOutputStream();

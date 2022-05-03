@@ -214,7 +214,7 @@ public class ChuQuanActivity extends AppCompatActivity {
         //set width for dialog
         int width = (int) (activity.getResources().getDisplayMetrics().widthPixels * 0.95);
         //set height for dialog
-        int height = (int) (activity.getResources().getDisplayMetrics().heightPixels * 0.7);
+        int height = (int) (activity.getResources().getDisplayMetrics().heightPixels * 0.75);
         dialog.getWindow().setLayout(width, height);
         dialog.show();
 

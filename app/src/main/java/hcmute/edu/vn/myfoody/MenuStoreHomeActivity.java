@@ -33,7 +33,7 @@ public class MenuStoreHomeActivity extends AppCompatActivity {
         imgBackMenuStoreHome = (ImageButton) findViewById(R.id.imgBackMenuStoreHome);
         listViewMenu = (ListView) findViewById(R.id.listViewMenu);
         foodArrayList = new ArrayList<Food>();
-        adapter = new MenuAdapter(MenuStoreHomeActivity.this, R.layout.row_menu, foodArrayList);
+        adapter = new MenuAdapter(MenuStoreHomeActivity.this, R.layout.row_menu, foodArrayList, Email);
         listViewMenu.setAdapter(adapter);
 
         Cursor dataFood = MainActivity.database.GetData("SELECT * FROM Foods WHERE StoreId = " + StoreId);

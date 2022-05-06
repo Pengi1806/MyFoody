@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import androidx.annotation.Nullable;
 
 import java.io.ByteArrayOutputStream;
+import java.util.Date;
 
 public class Database extends SQLiteOpenHelper {
 
@@ -225,6 +226,98 @@ public class Database extends SQLiteOpenHelper {
 
         statement.execute();
         database.close();
+    }
+
+    public void insertCartItem(Integer foodId, String email){
+        SQLiteDatabase database = getWritableDatabase();
+        String sql = "INSERT INTO CartItems VALUES(?, ?, 1)";
+        SQLiteStatement statement = database.compileStatement(sql);
+        statement.clearBindings();
+
+        statement.bindLong(1, foodId);
+        statement.bindString(2, email);
+
+        statement.executeInsert();
+    }
+
+    public void updateCartItem(Integer quantity, Integer foodId, String email){
+        SQLiteDatabase database = getWritableDatabase();
+        String sql = "UPDATE CartItems SET Quantity = ? WHERE FoodId = ? AND Email = ?";
+        SQLiteStatement statement = database.compileStatement(sql);
+        statement.clearBindings();
+
+        statement.bindLong(1, quantity);
+        statement.bindLong(2, foodId);
+        statement.bindString(3, email);
+
+        statement.execute();
+        database.close();
+    }
+
+    public void deleteOneCartItem(Integer foodId, String email){
+        SQLiteDatabase database = getWritableDatabase();
+        String sql = "DELETE FROM CartItems WHERE FoodId = ? AND Email = ?";
+        SQLiteStatement statement = database.compileStatement(sql);
+        statement.clearBindings();
+
+        statement.bindLong(1, foodId);
+        statement.bindString(2, email);
+
+        statement.execute();
+        database.close();
+    }
+
+    public void deleteAllCartItem(String email){
+        SQLiteDatabase database = getWritableDatabase();
+        String sql = "DELETE FROM CartItems WHERE Email = ?";
+        SQLiteStatement statement = database.compileStatement(sql);
+        statement.clearBindings();
+
+        statement.bindString(1, email);
+
+        statement.execute();
+        database.close();
+    }
+
+    public void insertOrder(Integer orderId, Date createTime, String email, Integer storeId){
+        SQLiteDatabase database = getWritableDatabase();
+        String sql = "INSERT INTO Orders VALUES(?, ?, null, ?, ?)";
+        SQLiteStatement statement = database.compileStatement(sql);
+        statement.clearBindings();
+
+        statement.bindLong(1, orderId);
+        statement.bindString(2, createTime.toString());
+        statement.bindString(3, email);
+        statement.bindLong(4, storeId);
+
+        statement.executeInsert();
+    }
+
+    public void updateTotalOrder(Float total, Integer orderId){
+        SQLiteDatabase database = getWritableDatabase();
+        String sql = "UPDATE Orders SET Total = ? WHERE OrderId = ?";
+        SQLiteStatement statement = database.compileStatement(sql);
+        statement.clearBindings();
+
+        statement.bindDouble(1, total);
+        statement.bindLong(2, orderId);
+
+        statement.execute();
+        database.close();
+    }
+
+    public void insertOrderDetail(Integer orderId, Integer foodId, Integer quantity, Float unitPrice){
+        SQLiteDatabase database = getWritableDatabase();
+        String sql = "INSERT INTO OrderDetails VALUES(?, ?, ?, ?)";
+        SQLiteStatement statement = database.compileStatement(sql);
+        statement.clearBindings();
+
+        statement.bindLong(1, orderId);
+        statement.bindLong(2, foodId);
+        statement.bindLong(3, quantity);
+        statement.bindDouble(4, unitPrice);
+
+        statement.executeInsert();
     }
 
     public byte[] imageViewToByte(ImageView image) {

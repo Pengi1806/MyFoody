@@ -104,6 +104,23 @@ public class Database extends SQLiteOpenHelper {
         database.close();
     }
 
+    public void insertStore(String storeName, String storeAddress, String openTime, String closeTime, Integer categoryId, byte[] coverPhoto, String email){
+        SQLiteDatabase database = getWritableDatabase();
+        String sql = "INSERT INTO Stores VALUES(null, ?, ?, ?, ?, ?, ?, 0, ?)";
+        SQLiteStatement statement = database.compileStatement(sql);
+        statement.clearBindings();
+
+        statement.bindString(1, storeName);
+        statement.bindString(2, storeAddress);
+        statement.bindString(3, openTime);
+        statement.bindString(4, closeTime);
+        statement.bindLong(5, categoryId);
+        statement.bindBlob(6, coverPhoto);
+        statement.bindString(7, email);
+
+        statement.executeInsert();
+    }
+
     public void updateCoverPhotoStore(byte[] image, Integer storeId) {
         SQLiteDatabase database = getWritableDatabase();
         String sql = "UPDATE Stores SET CoverPhoto = ? WHERE StoreId = ?";

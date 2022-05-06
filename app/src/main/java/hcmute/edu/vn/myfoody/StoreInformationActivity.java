@@ -230,17 +230,27 @@ public class StoreInformationActivity extends AppCompatActivity {
                 hour = selectedHour;
                 minute = selectedMinute;
                 if(type.equals("Open Time")) {
-                    textViewStoreOpenTime.setText(String.format(Locale.getDefault(), "%02d:%02d",hour,minute));
-                    MainActivity.database.updateOpenTimeStore(
-                            textViewStoreOpenTime.getText().toString().trim(),
-                            StoreId
-                    );
+                    String openTime = String.format(Locale.getDefault(), "%02d:%02d", hour, minute);
+                    if(textViewStoreCloseTime.getText().toString().trim().compareTo(openTime) >= 0){
+                        textViewStoreOpenTime.setText(openTime);
+                        MainActivity.database.updateOpenTimeStore(
+                                textViewStoreOpenTime.getText().toString().trim(),
+                                StoreId
+                        );
+                    } else {
+                        Toast.makeText(StoreInformationActivity.this, "Thời điểm mở cửa phải sớm hơn đóng cửa!", Toast.LENGTH_SHORT).show();
+                    }
                 } else {
-                    textViewStoreCloseTime.setText(String.format(Locale.getDefault(), "%02d:%02d",hour,minute));
-                    MainActivity.database.updateCloseTimeStore(
-                            textViewStoreCloseTime.getText().toString().trim(),
-                            StoreId
-                    );
+                    String closeTime = String.format(Locale.getDefault(), "%02d:%02d", hour, minute);
+                    if(closeTime.compareTo(textViewStoreOpenTime.getText().toString().trim()) >= 0) {
+                        textViewStoreCloseTime.setText(String.format(Locale.getDefault(), "%02d:%02d",hour,minute));
+                        MainActivity.database.updateCloseTimeStore(
+                                textViewStoreCloseTime.getText().toString().trim(),
+                                StoreId
+                        );
+                    } else {
+                        Toast.makeText(StoreInformationActivity.this, "Thời điểm mở cửa phải sớm hơn đóng cửa!", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         };

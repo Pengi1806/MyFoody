@@ -18,6 +18,9 @@
             android:name=".OrderActivity"
             android:exported="false" />
         <activity
+            android:name=".DangKyStoreActivity"
+            android:exported="false" />
+        <activity
             android:name=".AllInformationStoreHome"
             android:exported="false" />
         <activity

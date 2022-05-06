@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyFoody">
         <activity
+            android:name=".DangKyStoreActivity"
+            android:exported="false" />
+        <activity
             android:name=".AllInformationStoreHome"
             android:exported="false" />
         <activity

@@ -87,6 +87,7 @@ public class AddFoodActivity extends AppCompatActivity {
                         imageViewFood.setImageResource(R.mipmap.ic_launcher);
                         editTextFoodName.setText("");
                         editTextPrice.setText("");
+                        Flag = false;
                     } else {
                         Toast.makeText(AddFoodActivity.this, "Cần nhập đủ thông tin", Toast.LENGTH_SHORT).show();
                     }
@@ -124,7 +125,6 @@ public class AddFoodActivity extends AppCompatActivity {
 
                 Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
                 imageViewFood.setImageBitmap(bitmap);
-                //
                 Flag = true;
             } catch (FileNotFoundException e) {
                 e.printStackTrace();

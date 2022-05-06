@@ -112,6 +112,11 @@ public class ChuQuanActivity extends AppCompatActivity {
                 else if(item.getItemId() == R.id.nav_Exit) {
                     finish();
                 }
+                else if(item.getItemId() == R.id.nav_DanhSachHoaDon) {
+                    Intent intent = new Intent(ChuQuanActivity.this, OrderActivity.class);
+                    intent.putExtra("StoreId", StoreId);
+                    startActivity(intent);
+                }
                 return false;
             }
         });

@@ -5,7 +5,9 @@
     <item
         android:id="@+id/nav_ThongTinQuanAn"
         android:title="Thông tin quán ăn" />
-
+    <item
+        android:id="@+id/nav_DanhSachHoaDon"
+        android:title="Danh sách hóa đơn" />
     <item
         android:id="@+id/nav_Exit"
         android:title="Thoát chế độ" />

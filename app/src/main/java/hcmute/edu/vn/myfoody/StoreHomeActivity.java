@@ -132,7 +132,7 @@ public class StoreHomeActivity extends AppCompatActivity {
         }
 
         textViewStoreNameHome.setText(StoreName);
-        ratingBarStoreHome.setRating(StoreRateStar);
+        ratingBarStoreHome.setRating(Float.valueOf(StoreRateStar));
         textViewNumVote.setText(numVote.toString());
         textViewOpenTimeCloseTimeStoreHome.setText(StoreOpenTime + " - " + StoreCloseTime);
         textViewStoreAddressHome.setText(StoreAddress);

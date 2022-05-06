@@ -92,7 +92,25 @@ public class AccountFragment extends Fragment {
                     intent.putExtra("Email", Email);
                     startActivity(intent);
                 } else {
-                    Toast.makeText(getActivity(), "Bạn không phải chủ quán!", Toast.LENGTH_SHORT).show();
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                    builder.setMessage("Bạn muốn đăng ký trở thành chủ quán?");
+                    builder.setTitle("XÁC NHẬN");
+                    builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            Intent intent = new Intent(getActivity(), DangKyStoreActivity.class);
+                            intent.putExtra("Email", Email);
+                            startActivity(intent);
+                        }
+                    });
+                    builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            Toast.makeText(getActivity(), "Bạn không phải chủ quán!", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
                 }
             }
         });
@@ -128,6 +146,7 @@ public class AccountFragment extends Fragment {
         while (dataUser.moveToNext()){
             Name = dataUser.getString(2);
             Avatar = dataUser.getBlob(6);
+            Role = dataUser.getInt(7);
         }
         txtViewName.setText(Name);
         // Xử lý Avatar

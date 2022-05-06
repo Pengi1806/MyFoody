@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -26,7 +27,12 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.TimeZone;
 
 public class StoreHomeActivity extends AppCompatActivity {
 
@@ -132,6 +138,20 @@ public class StoreHomeActivity extends AppCompatActivity {
         textViewStoreAddressHome.setText(StoreAddress);
         textViewStoreCategoryHome.setText(StoreCategoryName);
         textViewStorePriceHome.setText(StoreFoodMinPrice.toString() + " - " + StoreFoodMaxPrice.toString());
+
+        //Xử lý Time
+        Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("GMT+07:00"));
+        Date currentTime = cal.getTime();
+        DateFormat dateFormat = new SimpleDateFormat("HH:mm");
+        dateFormat.setTimeZone(TimeZone.getTimeZone("GMT+07:00"));
+        String localTime = dateFormat.format(currentTime);
+        if(localTime.compareTo(StoreOpenTime) >= 0 && StoreCloseTime.compareTo(localTime) >= 0){
+            textViewOpeningClosedStoreHome.setText("OPENING");
+            textViewOpeningClosedStoreHome.setTextColor(Color.rgb(00,186,00));
+        } else {
+            textViewOpeningClosedStoreHome.setText("CLOSED");
+            textViewOpeningClosedStoreHome.setTextColor(Color.GRAY);
+        }
 
         commentArrayList = new ArrayList<Comment>();
         adapter = new CommentListAdapter(StoreHomeActivity.this, R.layout.row_comment, commentArrayList);

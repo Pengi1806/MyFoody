@@ -12,6 +12,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.TimeZone;
+
 public class MainActivity extends AppCompatActivity {
 
     public static Database database;
@@ -193,16 +199,60 @@ public class MainActivity extends AppCompatActivity {
 //        database.QueryData("INSERT INTO Categories VALUES(null, 'Beer club')");
 
         //insert Stores data
-//        database.QueryData("INSERT INTO Stores VALUES(null, 'Kobe Teppanyaki - Nhà Hàng Nhật', '13A Tú Xương, P. 7, Quận 3, TP. HCM', '10:00', '22:00', 1, null, 0, '1@gmail.com')");
+//        database.QueryData("INSERT INTO Stores VALUES(null, 'Vua Cua', '153 Bình Phú, P. 11, Quận 6, TP. HCM', '10:00', '22:00', 1, null, 0, '1@gmail.com')");
 //        database.QueryData("INSERT INTO Stores VALUES(null, 'Pizza Hut - Trương Định', '61 Trương Định, Quận 3, TP. HCM', '10:00', '22:00', 2, null, 0, '2@gmail.com')");
 //        database.QueryData("INSERT INTO Stores VALUES(null, 'Bánh mì Chay Vĩnh Viễn', '203 Vĩnh Viễn, Quận 10, TP. HCM', '06:00', '21:00', 3, null, 0, '3@gmail.com')");
 //        database.QueryData("INSERT INTO Stores VALUES(null, 'Five Boys - Sinh Tố Bùi Viện', '84/7 Bùi Viện, Quận 1, TP. HCM', '11:00', '23:59', 4, null, 0, '4@gmail.com')");
 //        database.QueryData("INSERT INTO Stores VALUES(null, 'Lẩu Bò Tí Chuột 2', '21 Cống Quỳnh, Quận 1, TP. HCM', '09:00', '22:00', 5, null, 0, '5@gmail.com')");
 //        database.QueryData("INSERT INTO Stores VALUES(null, 'Hangout Restaurant', '361A Phạm Ngũ Lão, Quận 1, TP. HCM', '10:00', '21:00', 6, null, 0, '6@gmail.com')");
 //        database.QueryData("INSERT INTO Stores VALUES(null, 'Súp Cua Thảo - Hồ Thị Kỷ', '68/8 Hồ Thị Kỷ, Quận 10, TP. HCM', '13:00', '22:00', 7, null, 0, '7@gmail.com')");
-//        database.QueryData("INSERT INTO Stores VALUES(null, 'Phúc Long 122 Lê Lợi', '122 Lê Lợi, Quận 1, TP. HCM', '8:00', '20:00', 8, null, 0, '8@gmail.com')");
+//        database.QueryData("INSERT INTO Stores VALUES(null, 'Phúc Long 122 Lê Lợi', '122 Lê Lợi, Quận 1, TP. HCM', '08:00', '20:00', 8, null, 0, '8@gmail.com')");
 //        database.QueryData("INSERT INTO Stores VALUES(null, 'Lush Saigon Bar', '2 Lý Tự Trọng, Quận 1, TP. HCM', '17:00', '23:59', 9, null, 0, '9@gmail.com')");
 //        database.QueryData("INSERT INTO Stores VALUES(null, 'Fox Beer Club - Hàm Nghi', '11 Hàm Nghi, Quận 1, TP. HCM', '17:00', '23:59', 10, null, 0, '10@gmail.com')");
+
+//        database.QueryData("INSERT INTO Stores VALUES(null, 'May Restaurant & Lounge', '56 Bùi Thị Xuân, Quận 1, TP. HCM', '08:00', '23:59', 1, null, 0, '11@gmail.com')");
+//        database.QueryData("INSERT INTO Stores VALUES(null, 'El Sol - Meat & Wine', '140/2 Võ Thị Sáu, Quận 3, TP. HCM', '11:00', '22:00', 2, null, 0, '12@gmail.com')");
+//        database.QueryData("INSERT INTO Stores VALUES(null, 'Hạnh Dung - Ẩm Thực Chay Mặn', '111 Âu Cơ, P.14, Quận 11, TP. HCM', '06:00', '22:00', 3, null, 0, '13@gmail.com')");
+//        database.QueryData("INSERT INTO Stores VALUES(null, 'Chilli - Lẩu Nướng Tự Chọn', '232 Vĩnh Khánh, Quận 4, TP. HCM', '16:00', '23:59', 4, null, 0, '14@gmail.com')");
+//        database.QueryData("INSERT INTO Stores VALUES(null, 'Lẩu Dê Tri Kỷ', '335 Lê Văn Sỹ, Quận Tân Bình, TP. HCM', '10:30', '23:00', 5, null, 0, '15@gmail.com')");
+//        database.QueryData("INSERT INTO Stores VALUES(null, 'Nhà Hàng - Phòng Trà Ân Nam', '52 Trương Định, P.7, Quận 3, TP. HCM', '06:30', '23:00', 6, null, 0, '16@gmail.com')");
+//        database.QueryData("INSERT INTO Stores VALUES(null, 'Quán 223 - Bánh Flan Thập Cẩm', '223 Trần Bình Trọng, Quận 5, TP. HCM', '11:30', '21:00', 7, null, 0, '17@gmail.com')");
+//        database.QueryData("INSERT INTO Stores VALUES(null, 'Paris Baguette - Cao Thắng', '1 Cao Thắng, P. 2, Quận 3, TP.HCM', '7:00', '23:00', 8, null, 0, '18@gmail.com')");
+//        database.QueryData("INSERT INTO Stores VALUES(null, 'Fang Pub', '13 Hồ Xuân Hương, Quận 3, TP. HCM', '18:00', '23:59', 9, null, 0, '19@gmail.com')");
+//        database.QueryData("INSERT INTO Stores VALUES(null, 'BiaCraft - Lê Ngô Cát', '1 Lê Ngô Cát, Quận 3, TP. HCM', '11:00', '22:30', 10, null, 0, '20@gmail.com')");
+//
+//        database.QueryData("INSERT INTO Stores VALUES(null, 'Saigon Steak 123', '123 Lê Lợi, Quận 1, TP. HCM', '10:00', '23:00', 1, null, 0, '21@gmail.com')");
+//        database.QueryData("INSERT INTO Stores VALUES(null, 'Pizza 4Ps Pizza Kiểu Nhật', '8/15 Lê Thánh Tôn, Quận 1, TP. HCM', '10:00', '23:00', 2, null, 0, '22@gmail.com')");
+//        database.QueryData("INSERT INTO Stores VALUES(null, 'Vajra - Nhà Hàng Chay', '711 Lê Hồng Phong, P. 12, Quận 10, TP. HCM', '07:00', '23:00', 3, null, 0, '23@gmail.com')");
+//        database.QueryData("INSERT INTO Stores VALUES(null, 'Moon Fast Food - Món Hàn', '53 Xuân Hồng, P. 12, Quận Tân Bình, TP. HCM', '11:00', '21:30', 4, null, 0, '24@gmail.com')");
+//        database.QueryData("INSERT INTO Stores VALUES(null, 'Đô Na - Quán Ốc', '237 Trần Văn Đang, Quận 3, TP. HCM', '12:00', '23:59', 5, null, 0, '25@gmail.com')");
+//        database.QueryData("INSERT INTO Stores VALUES(null, 'Sumo BBQ - Buffet Nướng & Lẩu', '300 Lê Văn Sỹ, Quận Tân Bình, TP. HCM', '17:00', '22:00', 6, null, 0, '26@gmail.com')");
+//        database.QueryData("INSERT INTO Stores VALUES(null, 'Bánh Tráng Trộn Chú Viên', '38 Nguyễn Thượng Hiền, Quận 3, TP. HCM', '11:30', '19:00', 7, null, 0, '27@gmail.com')");
+//        database.QueryData("INSERT INTO Stores VALUES(null, 'Monkey In Black Cafe', '263 Trần Quang Khải, Quận 1, TP. HCM', '8:00', '22:00', 8, null, 0, '28@gmail.com')");
+//        database.QueryData("INSERT INTO Stores VALUES(null, 'Chill Sky Bar', '76A Lê Lai, Quận 1, TP. HCM', '17:30', '23:59', 9, null, 0, '29@gmail.com')");
+//        database.QueryData("INSERT INTO Stores VALUES(null, 'Poc Poc Beer Garden', '39 Phạm Ngọc Thạch, Quận 3, TP. HCM', '07:00', '23:30', 10, null, 0, '30@gmail.com')");
+//
+//        database.QueryData("INSERT INTO Stores VALUES(null, 'Ngọc Sương - Hoàng Việt', '6 Hoàng Việt, Quận Tân Bình, TP. HCM', '10:00', '22:00', 1, null, 0, '31@gmail.com')");
+//        database.QueryData("INSERT INTO Stores VALUES(null, 'Marukame Udon - Udon & Tempura', '215 Lý Tự Trọng, Quận 1, TP. HCM', '07:00', '21:30', 2, null, 0, '32@gmail.com')");
+//        database.QueryData("INSERT INTO Stores VALUES(null, 'Cơm Chay Mani', '291/2 Võ Văn Tần, P. 5, Quận 3, TP. HCM', '16:00', '21:00', 3, null, 0, '33@gmail.com')");
+//        database.QueryData("INSERT INTO Stores VALUES(null, 'Gà Cơ Bắp - Chuyên Các Món Gà', '171B Trần Văn Đang, Quận 3, TP. HCM', '08:00', '23:00', 4, null, 0, '34@gmail.com')");
+//        database.QueryData("INSERT INTO Stores VALUES(null, 'Vườn Ốc Wongnai', '268 Tô Hiến Thành, Quận 10, TP. HCM', '15:00', '22:30', 5, null, 0, '35@gmail.com')");
+//        database.QueryData("INSERT INTO Stores VALUES(null, 'Langfarm Buffet', '771 Trần Hưng Đạo, Quận 5, TP. HCM', '08:00', '22:00', 6, null, 0, '36@gmail.com')");
+//        database.QueryData("INSERT INTO Stores VALUES(null, 'Xôi Chè Bùi Thị Xuân', '111 Bùi Thị Xuân, Quận 1, TP. HCM', '06:30', '22:00', 7, null, 0, '37@gmail.com')");
+//        database.QueryData("INSERT INTO Stores VALUES(null, 'Partea - English Tearoom', '42 Nguyễn Huệ, Quận 1, TP. HCM', '09:00', '22:00', 8, null, 0, '38@gmail.com')");
+//        database.QueryData("INSERT INTO Stores VALUES(null, 'Acoustic - Live Music Cafe', '6E1 Ngô Thời Nhiệm, Quận 3, TP. HCM', '18:00', '23:39', 9, null, 0, '39@gmail.com')");
+//        database.QueryData("INSERT INTO Stores VALUES(null, 'Vuvuzela Beer Club', 'A43 Trường Sơn, Quận Tân Bình, TP. HCM', '16:00', '23:59', 10, null, 0, '40@gmail.com')");
+//
+//        database.QueryData("INSERT INTO Stores VALUES(null, 'The LOG Restaurant', '8 Nguyễn Bỉnh Khiêm, Quận 1, TP. HCM', '18:00', '23:30', 1, null, 0, '41@gmail.com')");
+//        database.QueryData("INSERT INTO Stores VALUES(null, 'Hanuri - Quán Ăn Hàn Quốc', '284A Nguyễn Đình Chiểu, P. 6, Quận 3, TP. HCM', '09:00', '21:30', 2, null, 0, '42@gmail.com')");
+//        database.QueryData("INSERT INTO Stores VALUES(null, 'Hum Vegetarian - Café & Restaurant', '32 Võ Văn Tần, P. 6, Quận 3, TP. HCM', '10:00', '22:00', 3, null, 0, '43@gmail.com')");
+//        database.QueryData("INSERT INTO Stores VALUES(null, 'Bún Đậu Homemade', '6 Hồng Hà, Quận Tân Bình, TP. HCM', '10:00', '22:00', 4, null, 0, '44@gmail.com')");
+//        database.QueryData("INSERT INTO Stores VALUES(null, 'Lương Sơn Quán - Bò Tùng Xẻo', '31 Lý Tự Trọng, Quận 1, TP. HCM', '10:00', '22:00', 5, null, 0, '45@gmail.com')");
+//        database.QueryData("INSERT INTO Stores VALUES(null, 'King BBQ - Vua Nướng Hàn Quốc', '58 Cao Thắng, Quận 3, TP. HCM', '10:00', '21:15', 6, null, 0, '46@gmail.com')");
+//        database.QueryData("INSERT INTO Stores VALUES(null, 'Thiên Du & Sky Sushi', '1089 Trần Hưng Đạo, Quận 5, TP. HCM', '11:00', '22:00', 7, null, 0, '47@gmail.com')");
+//        database.QueryData("INSERT INTO Stores VALUES(null, 'Du Miên Garden Cafe', '7 Phan Văn Trị, Quận Gò Vấp, TP. HCM', '7:00', '23:00', 8, null, 0, '48@gmail.com')");
+//        database.QueryData("INSERT INTO Stores VALUES(null, 'M.Bar - Majestic Hotel', '1 Đồng Khởi, Quận 1, TP. HCM', '07:00', '23:00', 9, null, 0, '49@gmail.com')");
+//        database.QueryData("INSERT INTO Stores VALUES(null, 'Gammer Beer 107', '107 Pasteur, Quận 1, TP. HCM', '09:00', '23:59', 10, null, 0, '50@gmail.com')");
 
         //insert Users data
 //        database.QueryData("INSERT INTO Users VALUES('1@gmail.com', '1', '1', null, null, null, null, 1, 'An Hội', 2)");
@@ -427,5 +477,11 @@ public class MainActivity extends AppCompatActivity {
 //        database.QueryData("INSERT INTO RatingStars VALUES(null, 4, 1, '98@gmail.com')");
 //        database.QueryData("INSERT INTO RatingStars VALUES(null, 3.5, 1, '97@gmail.com' )");
 //        database.QueryData("INSERT INTO RatingStars VALUES(null, 3, 1, '96@gmail.com')");
+//        Cursor cursor = database.GetData("SELECT * FROM Stores");
+//        while (cursor.moveToNext()){
+//            Log.d("TAG", "CreateDatabase: " + cursor.getInt(0));
+//            Log.d("TAG", "CreateDatabase: " + cursor.getString(1));
+//            Log.d("TAG", "CreateDatabase: " + cursor.getString(8));
+//        }
     }
 }

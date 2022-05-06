@@ -1,14 +1,37 @@
 package hcmute.edu.vn.myfoody;
 
-import androidx.appcompat.app.AppCompatActivity;
+public class CartItem {
+    Integer FoodId;
+    String Email;
+    Integer Quantity;
 
-import android.os.Bundle;
+    public CartItem(Integer foodId, String email, Integer quantity) {
+        FoodId = foodId;
+        Email = email;
+        Quantity = quantity;
+    }
 
-public class CartItem extends AppCompatActivity {
+    public Integer getFoodId() {
+        return FoodId;
+    }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cart_item);
+    public void setFoodId(Integer foodId) {
+        FoodId = foodId;
+    }
+
+    public String getEmail() {
+        return Email;
+    }
+
+    public void setEmail(String email) {
+        Email = email;
+    }
+
+    public Integer getQuantity() {
+        return Quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        Quantity = quantity;
     }
 }

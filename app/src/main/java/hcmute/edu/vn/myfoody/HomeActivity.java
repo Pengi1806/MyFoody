@@ -31,6 +31,7 @@ public class HomeActivity extends AppCompatActivity {
 
         bundle.putString("Email", Email);
         homeFragment.setArguments(bundle);
+        cartFragment.setArguments(bundle);
         accountFragment.setArguments(bundle);
 
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);

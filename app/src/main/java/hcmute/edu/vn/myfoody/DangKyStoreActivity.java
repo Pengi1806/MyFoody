@@ -143,6 +143,7 @@ public class DangKyStoreActivity extends AppCompatActivity {
                                     Email
                             );
                             MainActivity.database.QueryData("UPDATE Users SET Role = 1 WHERE Email = '" + Email + "'");
+                            Flag = false;
                             Intent intent = new Intent(DangKyStoreActivity.this, ChuQuanActivity.class);
                             intent.putExtra("Email", Email);
                             startActivity(intent);

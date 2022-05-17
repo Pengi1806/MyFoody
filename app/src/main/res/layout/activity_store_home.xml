@@ -302,7 +302,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:text="View all information"
+                    android:text="Contact"
                     android:textSize="20sp"
                     android:textColor="#0000FF"
                     android:layout_gravity="center"

@@ -63,15 +63,20 @@ public class SignUp2 extends AppCompatActivity {
             public void onClick(View view) {
                 String SecurityQuestion = spinnerSecurityQuestions.getSelectedItem().toString().trim();
                 String SecurityAnswer = editSecurityAnswer.getText().toString().trim();
+                Integer QuestionIdSqlite = -2 ;
                 if (SecurityQuestion.equals("[Choose your security question]") == false) {
                     if(SecurityAnswer.equals("") == false) {
+                        Cursor dataSecurityQuestions = MainActivity.database.GetData("SELECT * FROM SecurityQuestions WHERE QuestionContent = '" + SecurityQuestion + "'");
+                        while (dataSecurityQuestions.moveToNext()){
+                            QuestionIdSqlite = dataSecurityQuestions.getInt(0);
+                        }
                         MainActivity.database.INSERT_USER(
                                 Email,
                                 Password,
                                 Name,
                                 Phone,
                                 SecurityAnswer,
-                                QuestionID
+                                QuestionIdSqlite
                         );
                         Toast.makeText(SignUp2.this, "Đăng ký thành công!", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(SignUp2.this, MainActivity.class);
